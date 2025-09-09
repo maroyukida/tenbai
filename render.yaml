@@ -10,7 +10,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: RESALE_EXPORTS_DIR
-        value: exports
+        value: ytanalyzer/published_exports
       # Optional (設定すると精度向上)
       - key: ALIEXPRESS_APP_KEY
         value: ""
@@ -18,8 +18,3 @@ services:
         value: ""
       - key: ALIEXPRESS_TRACKING_ID
         value: ""
-    disk:
-      name: exports-disk
-      mountPath: /app/exports
-      sizeGB: 1
-
