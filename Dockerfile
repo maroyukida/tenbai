@@ -17,3 +17,5 @@ EXPOSE 3500
 
 # Use shell to expand $PORT provided by the platform (Render sets PORT).
 CMD ["sh", "-c", "waitress-serve --listen=0.0.0.0:${PORT:-3500} ytanalyzer.webapp.app:create_app"]
+
+
