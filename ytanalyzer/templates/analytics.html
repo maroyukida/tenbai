@@ -1,0 +1,70 @@
+{% extends "layout.html" %}{% block body %}
+  <div class="container-max mt-4">
+    <h4>📊 BANチャンネル傾向分析</h4>
+
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header"><h6>📈 毎日のBAN数推移（直近3ヶ月）</h6></div>
+          <div class="card-body">
+            <canvas id="dailyChart" height="150"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header"><h6>🎯 ジャンル別BAN数ランキング</h6></div>
+          <div class="card-body">
+            <canvas id="genreChart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header"><h6>📈 月別BAN数推移</h6></div>
+          <div class="card-body">
+            <canvas id="monthlyChart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header"><h6>👥 登録者数別BAN数比較</h6></div>
+          <div class="card-body">
+            <canvas id="subsChart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    new Chart(document.getElementById('dailyChart'), {
+      type: 'line',
+      data: { labels: {{ daily_labels | tojson }}, datasets: [{ label: 'BAN数', data: {{ daily_counts | tojson }}, borderWidth: 1}] },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('genreChart'), {
+      type: 'bar',
+      data: { labels: {{ genre_labels | tojson }}, datasets: [{ label: 'BAN数', data: {{ genre_counts | tojson }} }] },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('monthlyChart'), {
+      type: 'line',
+      data: { labels: {{ monthly_labels | tojson }}, datasets: [{ label: 'BAN数', data: {{ monthly_data | tojson }} }] },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('subsChart'), {
+      type: 'bar',
+      data: { labels: {{ subs_labels | tojson }}, datasets: [{ label: 'BAN数', data: {{ subs_data | tojson }} }] },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+    });
+  </script>
+{% endblock %}

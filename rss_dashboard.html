@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>RSS Watcher Progress</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif; margin: 24px; }
+    .wrap { max-width: 900px; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; }
+    .kpi { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 10px; padding: 12px; }
+    .kpi h3 { margin: 0 0 6px 0; font-size: 13px; color: #666; }
+    .kpi p { margin: 0; font-size: 26px; font-weight: 700; }
+    .muted { color: #777; font-size: 13px; }
+    .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { border: 1px solid #e9ecef; padding: 8px; text-align: left; }
+    th { background: #fafafa; }
+  </style>
+  <script>
+    async function poll() {
+      try {
+        const res = await fetch('data/rss_progress.json', {cache: 'no-store'});
+        if (!res.ok) throw new Error('no progress');
+        const d = await res.json();
+        document.getElementById('updated').textContent = d.updated_at ?? '-';
+        document.getElementById('total').textContent = (d.total_channels ?? 0).toLocaleString();
+        document.getElementById('due').textContent = (d.due_now ?? 0).toLocaleString();
+        document.getElementById('videos').textContent = (d.videos_table_count ?? 0).toLocaleString();
+        document.getElementById('queue').textContent = (d.discovered_queue_count ?? 0).toLocaleString();
+        const lb = d.last_batch || {};
+        document.getElementById('ok').textContent = (lb.ok ?? 0).toLocaleString();
+        document.getElementById('nm').textContent = (lb.not_modified ?? 0).toLocaleString();
+        document.getElementById('new').textContent = (lb.new_videos ?? 0).toLocaleString();
+        document.getElementById('be').textContent = ((lb.blocked ?? 0) + (lb.error ?? 0)).toLocaleString();
+
+        const tbody = document.getElementById('table');
+        tbody.innerHTML = '';
+        Object.entries(d).forEach(([k,v]) => {
+          const tr = document.createElement('tr');
+          const td1 = document.createElement('td'); td1.textContent = k;
+          const td2 = document.createElement('td'); td2.textContent = (typeof v === 'object') ? JSON.stringify(v) : String(v);
+          tr.appendChild(td1); tr.appendChild(td2); tbody.appendChild(tr);
+        });
+      } catch (e) {
+        console.log('Waiting for data/rss_progress.json ...');
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      poll();
+      setInterval(poll, 5000);
+    });
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <h1>RSS Watcher Progress</h1>
+    <div class="kpis">
+      <div class="kpi"><h3>Total channels</h3><p id="total">-</p></div>
+      <div class="kpi"><h3>Due now</h3><p id="due">-</p></div>
+      <div class="kpi"><h3>Videos (table)</h3><p id="videos">-</p></div>
+      <div class="kpi"><h3>Discovered queue</h3><p id="queue">-</p></div>
+      <div class="kpi"><h3>Last batch: OK</h3><p id="ok">-</p></div>
+      <div class="kpi"><h3>Last batch: 304</h3><p id="nm">-</p></div>
+      <div class="kpi"><h3>Last batch: NEW</h3><p id="new">-</p></div>
+      <div class="kpi"><h3>429/Errors</h3><p id="be">-</p></div>
+    </div>
+    <p class="muted">Updated: <span id="updated">-</span></p>
+    <p class="muted">このフォルダで: <span class="code">python -m http.server 8000</span> → <span class="code">http://localhost:8000/rss_dashboard.html</span></p>
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+      <tbody id="table"></tbody>
+    </table>
+  </div>
+</body>
+</html>
+

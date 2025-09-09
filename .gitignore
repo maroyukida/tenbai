@@ -1,0 +1,26 @@
+# Python / venv
+.venv/
+__pycache__/
+*.pyc
+
+# Local data / archives / logs
+data/
+archive/
+*.log
+*.sqlite
+*.db
+*.jsonl
+
+# Node / misc
+node_modules/
+
+# Project specific (exclude heavy/unrelated)
+mentomo/
+
+# Exports are generally large; include only CSVs
+exports/**
+!exports/*.csv
+
+# Vercel local state
+.vercel/
+

@@ -1,0 +1,25 @@
+project: maple-preBB
+time_range:
+  to: 20091231
+sources:
+  - pattern: "*.fc2.com/*"
+    match: domain
+  - pattern: "*.xrea.com/*"
+    match: domain
+  - pattern: "*/maple*"
+    match: prefix
+cdx:
+  collapse: "digest"
+  fields: ["timestamp","original","mimetype","statuscode","digest","length"]
+fetch:
+  rps: 1.5
+  retries: 3
+  timeout_sec: 20
+store:
+  warc_dir: "./archive/warc"
+  meta_dir: "./archive/meta"
+  index: "./index/maple.db"
+parse:
+  encoding_priority: ["utf-8","cp932","euc-jp","iso-2022-jp"]
+similarity:
+  simhash_bits: 64

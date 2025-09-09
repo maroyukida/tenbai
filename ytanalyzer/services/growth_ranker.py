@@ -1,0 +1,434 @@
+﻿# -*- coding: utf-8 -*-
+"""
+Growth Ranker
+
+繧ｹ繝翫ャ繝励す繝ｧ繝・ヨ(ytapi_snapshots)縺九ｉ 1h/3h/6h 繧剃ｸｭ蠢・↓莨ｸ縺ｳ邇・せ繧ｳ繧｢繧定ｨ育ｮ励＠縲・trending_ranks 繝・・繝悶Ν縺ｫ菫晏ｭ倥ゅす繝ｧ繝ｼ繝・繝ｭ繝ｳ繧ｰ縺ｯ duration_seconds 縺ｧ蛻､螳壹・繧ｸ繝｣繝ｳ繝ｫ縺ｯ蠖馴擇 category_id竊貞錐蜑阪・髱咏噪繝槭ャ繝励〒蝓九ａ縲∝ｰ・擂逧・↑諡｡蠑ｵ縺ｮ縺溘ａ縺ｫ
+繧ｫ繝・ざ繝ｪ蜷阪ｒ縺昴・縺ｾ縺ｾ菫晏ｭ假ｼ・ideo_genres遲峨・諡｡蠑ｵ繧呈Φ螳夲ｼ峨・"""
+from __future__ import annotations
+
+import argparse
+import math
+import os
+import sqlite3
+import json
+import re
+from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
+from typing import Dict, List, Optional, Tuple
+
+# Ensure ytapi_snapshots schema (incl. channel_title) exists/updated
+try:
+    # Local import to avoid circulars at module import time
+    from .api_fetcher import ensure_tables as ensure_snapshot_tables
+except Exception:
+    ensure_snapshot_tables = None  # type: ignore
+
+
+CATEGORY_MAP = {
+    # Minimal YouTube category mapping (JP/EN荳闊ｬ)
+    "1": "Film & Animation",
+    "2": "Autos & Vehicles",
+    "10": "Music",
+    "15": "Pets & Animals",
+    "17": "Sports",
+    "19": "Travel & Events",
+    "20": "Gaming",
+    "22": "People & Blogs",
+    "23": "Comedy",
+    "24": "Entertainment",
+    "25": "News & Politics",
+    "26": "Howto & Style",
+    "27": "Education",
+    "28": "Science & Technology",
+    "29": "Nonprofits & Activism",
+}
+
+
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc).replace(microsecond=0)
+
+
+
+def _is_short_like_v2(
+    duration_seconds: Optional[int],
+    title: Optional[str],
+    keywords_json: Optional[str],
+    canonical_url: Optional[str] = None,
+) -> bool:
+    text = (title or "").lower()
+    tags: list[str] = []
+    try:
+        if keywords_json:
+            arr = json.loads(keywords_json)
+            if isinstance(arr, list):
+                tags = [str(x).lower() for x in arr if x]
+    except Exception:
+        pass
+    blob = (text + " " + " ".join(tags) + " " + (canonical_url or "")).lower()
+    rx = r"(?i)(#?shorts?\b|vertical\b|reels?\b|tiktok\b|short\b|ショート|縦動画|縦型)"
+
+    def hinted() -> bool:
+        return (re.search(rx, blob) is not None) or ("/shorts/" in blob)
+
+    try:
+        if duration_seconds is not None:
+            d = int(duration_seconds)
+            if d <= 60:
+                return True
+            if d <= 180:
+                return hinted()
+            return False
+    except Exception:
+        pass
+    return hinted()
+
+
+def _is_short_like(duration_seconds: Optional[int], title: Optional[str], keywords_json: Optional[str]) -> bool:
+    # Wrapper: delegate to v2
+    return _is_short_like_v2(duration_seconds, title, keywords_json, None)
+
+
+def ensure_tables(con: sqlite3.Connection) -> None:
+    cur = con.cursor()
+    cur.execute(
+        """
+        create table if not exists trending_ranks(
+          video_id text primary key,
+          channel_id text,
+          channel_title text,
+          title text,
+          thumb_hq text,
+          published_at text,
+          category_id text,
+          category_name text,
+          is_short integer,
+          score real,
+          d1h real,
+          d3h real,
+          d6h real,
+          v0 integer,
+          v1 integer,
+          v3 integer,
+          v6 integer,
+          current_views integer,
+          updated_at text
+        )
+        """
+    )
+    # schema extension: add likes_per_hour/channel_title if missing
+    cols = {r[1] for r in cur.execute("pragma table_info(trending_ranks)").fetchall()}
+    if "likes_per_hour" not in cols:
+        cur.execute("alter table trending_ranks add column likes_per_hour real")
+    if "channel_title" not in cols:
+        cur.execute("alter table trending_ranks add column channel_title text")
+    # 謌宣聞謖・ｨ吶く繝｣繝・す繝･繝・・繝悶Ν
+    cur.execute(
+        """
+        create table if not exists growth_metrics(
+          video_id text primary key,
+          is_short integer,
+          category_name text,
+          d1h real,
+          d3h real,
+          d6h real,
+          likes_per_hour real,
+          score real,
+          current_views integer,
+          updated_at text
+        )
+        """
+    )
+    # Indexes for faster reads
+    try:
+        cur.execute("create index if not exists idx_trending_score on trending_ranks(score desc)")
+    except Exception:
+        pass
+    try:
+        cur.execute("create index if not exists idx_trending_is_cat on trending_ranks(is_short, category_name)")
+    except Exception:
+        pass
+    con.commit()
+
+
+def open_db(path: str) -> sqlite3.Connection:
+    con = sqlite3.connect(path, timeout=60)
+    con.row_factory = sqlite3.Row
+    # Ensure our own tables
+    ensure_tables(con)
+    # And ensure ytapi_snapshots has expected columns (e.g., channel_title)
+    if ensure_snapshot_tables is not None:
+        try:
+            ensure_snapshot_tables(con)
+        except Exception:
+            # Non-fatal: continue even if ensure fails
+            pass
+    return con
+
+
+
+def fetch_candidates(con: sqlite3.Connection, window_hours: int = 48, limit: int = 20000) -> List[str]:
+    cur = con.cursor()
+    # discovered_at は ISO8601(Z,T) なので、SQLiteで比較できる形に整形してUNIX秒で比較
+    cur.execute(
+        """
+        select distinct d.video_id
+        from rss_videos_discovered d
+        where strftime('%s', replace(substr(d.discovered_at,1,19),'T',' ')) >= strftime('%s','now', ?)
+        limit ?
+        """,
+        (f"-{int(window_hours)} hours", limit),
+    )
+    return [r[0] for r in cur.fetchall()]
+
+
+def nearest(points: List[Tuple[datetime, int]], target: datetime, tol: timedelta) -> Optional[int]:
+    best = None
+    best_diff = None
+    for t, v in points:
+        diff = abs((t - target).total_seconds())
+        if best is None or diff < best_diff:
+            best = v
+            best_diff = diff
+    if best is None:
+        return None
+    if best_diff is not None and best_diff <= tol.total_seconds():
+        return best
+    return None
+
+
+def compute_metrics(con: sqlite3.Connection, video_id: str, tol_minutes: int = 20) -> Optional[Dict]:
+    cur = con.cursor()
+    rows = cur.execute(
+        "select polled_at, view_count, like_count, duration_seconds, category_id, channel_title from ytapi_snapshots where video_id=? order by polled_at asc",
+        (video_id,),
+    ).fetchall()
+    if len(rows) < 1:
+        return None
+    # t0 縺ｯ譛蛻昴・繧ｹ繝翫ャ繝励す繝ｧ繝・ヨ
+    t_points: List[Tuple[datetime, int]] = []
+    likes: List[Tuple[datetime, int]] = []
+    duration: Optional[int] = None
+    cat_id: Optional[str] = None
+    ch_title: Optional[str] = None
+    for r in rows:
+        t = datetime.fromisoformat(str(r[0]).replace("Z", "+00:00")).astimezone(timezone.utc)
+        t_points.append((t, int(r[1] or 0)))
+        likes.append((t, int(r[2] or 0)))
+        if duration is None and r[3] is not None:
+            duration = int(r[3])
+        if cat_id is None and r[4] is not None:
+            cat_id = str(r[4])
+        if ch_title is None and len(r) >= 6:
+            ch_title = r[5]
+
+    if not t_points:
+        return None
+    t0 = t_points[0][0]
+    v0 = t_points[0][1]
+    tol = timedelta(minutes=tol_minutes)
+
+    def val_at(delta_h: int) -> Optional[int]:
+        return nearest(t_points, t0 + timedelta(hours=delta_h), tol)
+
+    v1 = val_at(1)
+    v3 = val_at(3)
+    v6 = val_at(6)
+
+    # 現在値は最新
+    vcur = t_points[-1][1]
+    def rate(delta_v: Optional[int], hours: float) -> Optional[float]:
+        if delta_v is None or hours <= 0:
+            return None
+        return max(0.0, float(delta_v) / hours)
+
+    d1h = rate((v1 - v0) if v1 is not None else None, 1.0)
+    d3h = rate((v3 - v0) if v3 is not None else None, 3.0)
+    d6h = rate((v6 - v0) if v6 is not None else None, 6.0)
+    # likes/h 近似: 1hがあれば採用、なければ t0→最新の平均
+    likes_h = None
+    try:
+        l0 = likes[0][1]
+        l1 = nearest(likes, t0 + timedelta(hours=1), tol)
+        if l1 is not None:
+            likes_h = max(0.0, float(l1 - l0) / 1.0)
+        elif len(likes) >= 2:
+            hours = max(0.25, (likes[-1][0] - t0).total_seconds() / 3600.0)
+            likes_h = max(0.0, float(likes[-1][1] - l0) / hours) if hours > 0 else None
+    except Exception:
+        likes_h = None
+
+    parts: List[Tuple[float, float]] = []  # (weight, value)
+    if d1h is not None:
+        parts.append((0.50, math.log1p(d1h)))
+    if d3h is not None:
+        parts.append((0.30, math.log1p(d3h)))
+    if d6h is not None:
+        parts.append((0.15, math.log1p(d6h)))
+    if likes_h is not None:
+        parts.append((0.05, math.log1p(likes_h)))
+    # fallback when no hourly deltas exist
+    if not parts:
+        if len(t_points) >= 2:
+            hours = max(0.25, (t_points[-1][0] - t0).total_seconds() / 3600.0)
+            dcur = rate(vcur - v0, hours)
+            parts.append((1.0, math.log1p(dcur)))
+        else:
+            return None
+    wsum = sum(w for w, _ in parts)
+    score = sum(w * v for w, v in parts) / (wsum if wsum > 0 else 1.0)
+
+    # short-like detection: duration<=61 OR title/tags indicate shorts
+    # fetch title/keywords for heuristic
+    meta = cur.execute(
+        "select title, keywords_json, canonical_url from rss_videos where video_id=?",
+        (video_id,),
+    ).fetchone()
+    t_for_short = meta[0] if meta else None
+    kw_for_short = meta[1] if meta and len(meta) >= 2 else None
+    url_for_short = meta[2] if meta and len(meta) >= 3 else None
+    is_short = 1 if _is_short_like_v2(duration, t_for_short, kw_for_short, url_for_short) else 0
+    cat_name = CATEGORY_MAP.get(cat_id or "", "Unknown")
+
+    # 陦ｨ遉ｺ逕ｨ繝｡繧ｿ
+    meta2 = cur.execute(
+        "select title, published_at, thumb_hq from rss_videos where video_id=?",
+        (video_id,),
+    ).fetchone()
+    title = meta2[0] if meta2 else None
+    published_at = meta2[1] if meta2 else None
+    thumb_hq = meta2[2] if meta2 else None
+
+    return {
+        "video_id": video_id,
+        "channel_id": None,  # 逶ｴ蠕後〒陬懷ｮ・        "channel_title": ch_title,
+        "title": title or "",
+        "thumb_hq": thumb_hq or "",
+        "published_at": published_at,
+        "category_id": cat_id,
+        "category_name": cat_name,
+        "is_short": is_short,
+        "score": round(float(score), 6),
+        "d1h": d1h,
+        "d3h": d3h,
+        "d6h": d6h,
+        "likes_per_hour": likes_h,
+        "v0": v0,
+        "v1": v1,
+        "v3": v3,
+        "v6": v6,
+        "current_views": vcur,
+    }
+
+
+def upsert_rank(con: sqlite3.Connection, m: Dict) -> None:
+    cur = con.cursor()
+    # channel_id 補完
+    if not m.get("channel_id"):
+        ch = cur.execute("select channel_id from rss_videos where video_id=?", (m["video_id"],)).fetchone()
+        if ch and len(ch) >= 1:
+            m["channel_id"] = ch[0]
+    cur.execute(
+        """
+        insert into trending_ranks(video_id, channel_id, channel_title, title, thumb_hq, published_at, category_id, category_name, is_short,
+                                   score, d1h, d3h, d6h, likes_per_hour, v0, v1, v3, v6, current_views, updated_at)
+        values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, datetime('now'))
+        on conflict(video_id) do update set
+          channel_id=excluded.channel_id,
+          channel_title=excluded.channel_title,
+          title=excluded.title,
+          thumb_hq=excluded.thumb_hq,
+          published_at=excluded.published_at,
+          category_id=excluded.category_id,
+          category_name=excluded.category_name,
+          is_short=excluded.is_short,
+          score=excluded.score,
+          d1h=excluded.d1h,
+          d3h=excluded.d3h,
+          d6h=excluded.d6h,
+          likes_per_hour=excluded.likes_per_hour,
+          v0=excluded.v0,
+          v1=excluded.v1,
+          v3=excluded.v3,
+          v6=excluded.v6,
+          current_views=excluded.current_views,
+          updated_at=datetime('now')
+        """
+        ,
+        (
+            m["video_id"], m.get("channel_id"), m.get("channel_title"), m.get("title"), m.get("thumb_hq"), m.get("published_at"),
+            m.get("category_id"), m.get("category_name"), m.get("is_short"), m.get("score"),
+            m.get("d1h"), m.get("d3h"), m.get("d6h"), m.get("likes_per_hour"), m.get("v0"), m.get("v1"), m.get("v3"), m.get("v6"), m.get("current_views"),
+        ),
+    )
+    con.commit()
+
+
+def upsert_metrics(con: sqlite3.Connection, m: Dict) -> None:
+    cur = con.cursor()
+    cur.execute(
+        """
+        insert into growth_metrics(video_id, is_short, category_name, d1h, d3h, d6h, likes_per_hour, score, current_views, updated_at)
+        values(?,?,?,?,?,?,?,?,?, datetime('now'))
+        on conflict(video_id) do update set
+          is_short=excluded.is_short,
+          category_name=excluded.category_name,
+          d1h=excluded.d1h,
+          d3h=excluded.d3h,
+          d6h=excluded.d6h,
+          likes_per_hour=excluded.likes_per_hour,
+          score=excluded.score,
+          current_views=excluded.current_views,
+          updated_at=datetime('now')
+        """,
+        (
+            m["video_id"], m.get("is_short"), m.get("category_name"), m.get("d1h"), m.get("d3h"), m.get("d6h"), m.get("likes_per_hour"), m.get("score"), m.get("current_views"),
+        ),
+    )
+    con.commit()
+
+
+def run_once(db_path: str, window_hours: int = 48, tol_minutes: int = 20, max_videos: int = 10000) -> int:
+    con = open_db(db_path)
+    vids = fetch_candidates(con, window_hours=window_hours, limit=max_videos)
+    cnt_ok = 0
+    for vid in vids:
+        try:
+            m = compute_metrics(con, vid, tol_minutes=tol_minutes)
+            if not m:
+                continue
+            upsert_rank(con, m)
+            upsert_metrics(con, m)
+            cnt_ok += 1
+        except Exception as e:
+            try:
+                print(f"warn: failed to rank {vid}: {e}")
+            except Exception:
+                pass
+    # 荳贋ｽ・2500 莉ｶ縺ｸ繝医Μ繝
+    cur = con.cursor()
+    cur.execute("delete from trending_ranks where video_id not in (select video_id from trending_ranks order by score desc limit 1000000000)")
+    con.commit()
+    print(f"ranked videos: {cnt_ok} (trimmed to top 50000)")
+    return cnt_ok
+
+
+def build_arg_parser() -> argparse.ArgumentParser:
+    ap = argparse.ArgumentParser(description="Compute growth score and update trending ranks")
+    ap.add_argument("--db", default="data/rss_watch.sqlite")
+    ap.add_argument("--window-hours", type=int, default=48)
+    ap.add_argument("--tol-minutes", type=int, default=20)
+    ap.add_argument("--max-videos", type=int, default=10000)
+    return ap
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    ap = build_arg_parser()
+    args = ap.parse_args(argv)
+    return run_once(args.db, args.window_hours, args.tol_minutes, args.max_videos)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
+

@@ -1,0 +1,643 @@
+﻿HeavenMS diag 2025-09-08T23:37:08.1189175+09:00
+\n==== Process/Port check ====
+  TCP    0.0.0.0:7575           0.0.0.0:0              LISTENING       51164
+  TCP    0.0.0.0:7576           0.0.0.0:0              LISTENING       51164
+  TCP    0.0.0.0:7577           0.0.0.0:0              LISTENING       51164
+  TCP    0.0.0.0:8484           0.0.0.0:0              LISTENING       51164
+  TCP    [::]:7575              [::]:0                 LISTENING       51164
+  TCP    [::]:7576              [::]:0                 LISTENING       51164
+  TCP    [::]:7577              [::]:0                 LISTENING       51164
+  TCP    [::]:8484              [::]:0                 LISTENING       51164
+\n==== IP stack ====
+
+ComputerName    InterfaceAlias                     InterfaceIndex InterfaceDescription                       Compartmen
+                                                                                                                    tId
+------------    --------------                     -------------- --------------------                       ----------
+DESKTOP-LSI31G5 VMware Network Adapter VMnet1                  15 VMware Virtual Ethernet Adapter for VMnet1          1
+DESKTOP-LSI31G5 イーサネット                                         16 Intel(R) Ethernet Controller (3) I225-V             1
+DESKTOP-LSI31G5 VPN - VPN Client                               21 VPN Client Adapter - VPN                            1
+DESKTOP-LSI31G5 vEthernet (Default Switch)                     25 Hyper-V Virtual Ethernet Adapter                    1
+DESKTOP-LSI31G5 vEthernet (WSL (Hyper-V firewall))             41 Hyper-V Virtual Ethernet Adapter #2                 1
+DESKTOP-LSI31G5 VMware Network Adapter VMnet8                   9 VMware Virtual Ethernet Adapter for VMnet8          1
+DESKTOP-LSI31G5 ローカル エリア接続 2                                   22 ExpressVPN TUN Driver                               1
+
+
+
+\n==== Hosts file relevant lines ====
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+\n==== Server logs (world/channel registration) ====
+--- C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\logs\2025-09-08\players\Sessions.txt (last 200 lines) ---
+IoSession with /127.0.0.1:56243 opened on 08-09-2025 06:10
+IoSession with /127.0.0.1:63615 opened on 08-09-2025 06:11
+IoSession with /127.0.0.1:59092 opened on 08-09-2025 06:11
+IoSession with /127.0.0.1:59116 opened on 08-09-2025 06:11
+IoSession with /127.0.0.1:59129 opened on 08-09-2025 06:11
+IoSession with /127.0.0.1:54901 opened on 08-09-2025 06:12
+IoSession with /127.0.0.1:59427 opened on 08-09-2025 06:13
+IoSession with /127.0.0.1:50340 opened on 08-09-2025 06:14
+IoSession with /127.0.0.1:63399 opened on 08-09-2025 06:15
+IoSession with /127.0.0.1:51174 opened on 08-09-2025 06:20
+IoSession with /127.0.0.1:60868 opened on 08-09-2025 06:23
+IoSession with /127.0.0.1:64107 opened on 08-09-2025 06:25
+IoSession with /127.0.0.1:60408 opened on 08-09-2025 06:26
+IoSession with /127.0.0.1:61722 opened on 08-09-2025 06:27
+IoSession with /127.0.0.1:58570 opened on 08-09-2025 06:49
+IoSession with /127.0.0.1:60218 opened on 08-09-2025 06:51
+IoSession with /127.0.0.1:50686 opened on 08-09-2025 07:00
+IoSession with /127.0.0.1:64851 opened on 08-09-2025 07:09
+IoSession with /127.0.0.1:58128 opened on 08-09-2025 07:10
+IoSession with /127.0.0.1:50155 opened on 08-09-2025 07:33
+IoSession with /127.0.0.1:62859 opened on 08-09-2025 07:38
+IoSession with /127.0.0.1:61827 opened on 08-09-2025 07:40
+IoSession with /127.0.0.1:60113 opened on 08-09-2025 08:18
+IoSession with /127.0.0.1:61422 opened on 08-09-2025 08:32
+IoSession with /127.0.0.1:51478 opened on 08-09-2025 08:34
+IoSession with /127.0.0.1:54233 opened on 08-09-2025 08:37
+IoSession with /127.0.0.1:59827 opened on 08-09-2025 08:42
+IoSession with /127.0.0.1:59883 opened on 08-09-2025 08:43
+IoSession with /127.0.0.1:49995 opened on 08-09-2025 08:53
+IoSession with /127.0.0.1:54141 opened on 08-09-2025 09:12
+IoSession with /127.0.0.1:52043 opened on 08-09-2025 09:32
+--- C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\sources.txt (last 200 lines) ---
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\scripting\quest\QuestActionManager.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\scripting\quest\QuestScriptManager.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\scripting\reactor\ReactorActionManager.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\scripting\reactor\ReactorScriptManager.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\CashShop.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\DueyPackage.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MakerItemFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleItemInformationProvider.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleMarriage.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleShop.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleShopFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleShopItem.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleSkillbookInformationProvider.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleStatEffect.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleStorage.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleStorageInventory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MapleTrade.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\MTSItemInfo.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\ThreadManager.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\TimerManager.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\TimerManagerMBean.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\MapleEvents.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\RescueGaga.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\gm\MapleCoconut.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\gm\MapleCoconuts.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\gm\MapleEvent.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\gm\MapleFitness.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\gm\MapleOla.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\gm\MapleOxQuiz.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\events\gm\MapleSnowball.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\expeditions\MapleExpedition.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\expeditions\MapleExpeditionBossLog.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\expeditions\MapleExpeditionType.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\Ellinia.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\ElNath.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\GachaponItems.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\Global.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\Henesys.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\KerningCity.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\Ludibrium.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\MapleGachapon.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\MushroomShrine.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\NautilusHarbor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\NewLeafCity.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\Perion.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\ShowaSpaFemale.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\ShowaSpaMale.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\gachapon\Sleepywood.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\AbstractLoadedMapleLife.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\ChangeableStats.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\Element.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\ElementalEffectiveness.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MapleLifeFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MapleMonster.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MapleMonsterInformationProvider.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MapleMonsterStats.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MapleNPC.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MapleNPCStats.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MaplePlayerNPC.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MaplePlayerNPCFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MobAttackInfo.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MobAttackInfoFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MobSkill.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MobSkillFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MonsterDropEntry.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MonsterGlobalDropEntry.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\MonsterListener.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\OverrideMonsterStats.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\SpawnPoint.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\positioner\MaplePlayerNPCPodium.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\life\positioner\MaplePlayerNPCPositioner.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\loot\MapleLootInventory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\loot\MapleLootManager.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\AbstractAnimatedMapleMapObject.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\AbstractMapleMapObject.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\AnimatedMapleMapObject.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\FieldLimit.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleDoor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleDoorObject.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleDragon.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleFoothold.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleFootholdTree.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleGenericPortal.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleHiredMerchant.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleKite.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMap.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMapEffect.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMapFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMapItem.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMapManager.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMapObject.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMapObjectType.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMapPortal.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMiniDungeon.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMiniDungeonInfo.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMiniGame.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleMist.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MaplePlayerShop.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MaplePlayerShopItem.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MaplePortal.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MaplePortalFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleReactor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleReactorFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleReactorStats.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleSummon.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapleTVEffect.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\MapMonitor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\ReactorDropEntry.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\SavedLocation.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\SavedLocationType.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\maps\SummonMovementType.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\minigame\MapleRockPaperScissor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\AbsoluteLifeMovement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\AbstractLifeMovement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\ChairMovement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\ChangeEquip.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\JumpDownMovement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\LifeMovement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\LifeMovementFragment.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\RelativeLifeMovement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\movement\TeleportMovement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\partyquest\AriantColiseum.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\partyquest\GuardianSpawnPoint.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\partyquest\MapleCarnivalFactory.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\partyquest\MonsterCarnival.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\partyquest\MonsterCarnivalParty.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\partyquest\PartyQuest.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\partyquest\Pyramid.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\MapleQuest.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\MapleQuestActionType.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\MapleQuestRequirementType.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\BuffAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\ExpAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\FameAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\InfoAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\ItemAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\MapleQuestAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\MesoAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\NextQuestAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\PetSkillAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\PetSpeedAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\PetTamenessAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\QuestAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\actions\SkillAction.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\BuffExceptRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\BuffRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\CompletedQuestRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\EndDateRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\FieldEnterRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\InfoExRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\InfoNumberRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\IntervalRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\ItemRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\JobRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\MapleQuestRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\MaxLevelRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\MesoRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\MinLevelRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\MinTamenessRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\MobRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\MonsterBookCountRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\NpcRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\PetRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\QuestRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\server\quest\requirements\ScriptRequirement.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\ArrayMap.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\AutoJCE.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\BCrypt.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\DatabaseConnection.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\FilePrinter.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\HexTool.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\IntervalBuilder.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\LogHelper.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\LongTool.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\MapleAESOFB.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\MapleLogger.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\MaplePacketCreator.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\Pair.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\Randomizer.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\StringUtil.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\ByteArrayByteStream.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\ByteInputStream.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\GenericLittleEndianAccessor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\GenericSeekableLittleEndianAccessor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\InputStreamByteStream.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\LittleEndianAccessor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\RandomAccessByteStream.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\SeekableInputStreamBytestream.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\input\SeekableLittleEndianAccessor.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\output\BAOSByteOutputStream.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\output\ByteOutputStream.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\output\GenericLittleEndianWriter.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\output\LittleEndianWriter.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\data\output\MaplePacketLittleEndianWriter.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\exceptions\EmptyMovementException.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\exceptions\EventInstanceInProgressException.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\exceptions\IdTypeNotSupportedException.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\exceptions\NotEnabledException.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\packets\Fishing.java
+C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\src\tools\packets\Wedding.java
+--- C:\Users\mouda\HeavenMS\jdk8\jdk8u462-b08\sample\scripting\scriptpad\src\scripts\README.txt (last 200 lines) ---
+Sample scripts:
+
+(1) browse.js 
+
+ -- Open and run this script in scriptpad. You will see 
+    Tools->Browse menu. Using this you can start your
+    desktop default browser with the given URL.
+
+(2) insertfile.js
+
+ -- Open and run this script in scriptpad. You will see 
+    "Tools->Insert File..." menu. Using this you can start 
+    insert content of a selected file into currently
+    edited document
+
+(3) linewrap.js
+
+ -- Open and run this script in scriptpad. You will see 
+    "Tools->Line Wrap" menu. Using this you can toggle
+    the line wrapping mode of the editor
+
+(4) mail.js
+
+ -- Open and run this script in scriptpad. You will see 
+    Tools->Mail menu. Using this you can start your
+    desktop default mail client with the given "To" mail id.
+
+(5) memmonitor.js
+
+ -- This is a simple Monitoring & Management script. To use this,
+    you need an application to monitor. You can use memory.bat
+    or memory.sh in the current directory to start an application
+    that will be monitored. After that please follow these steps:
+
+   1. Start the target application using memory.sh or memory.bat
+   2. Start scriptpad 
+   3. Use "Tools->JMX Connect" menu and specify "localhost:1090"
+      to connect
+   4. Open "memmonitor.js" and run it (using "Tools->Run")       
+      in scriptpad
+   5. A new "Tools-Memory Monitor" menu appears. Use this menu
+      and specify 4 and 500 as threshold and interval values.
+   6. In the target application shell (where memory.bat/.sh was
+      started), enter an integer value and press "enter".
+   7. You'll see an alert box from scriptpad -- alerting you for
+      memory threshold exceeded!
+
+(6) textcolor.js
+
+ -- Open and run this script in scriptpad. You will see 
+    "Tools->Selected Text Color..." menu. Using this you
+    change the color of "selected text" in the editor.
+--- C:\Users\mouda\HeavenMS\jdk8\jdk8u462-b08\jre\lib\jvm.hprof.txt (last 200 lines) ---
+Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+  - Neither the name of Oracle nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+Header for -agentlib:hprof (or -Xrunhprof) ASCII Output (JDK 5.0 JVMTI based)
+
+WARNING!  This file format is under development, and is subject to
+change without notice.
+
+This file contains the following types of records:
+
+THREAD START
+THREAD END      mark the lifetime of Java threads
+
+TRACE           represents a Java stack trace.  Each trace consists
+                of a series of stack frames.  Other records refer to
+                TRACEs to identify (1) where object allocations have
+                taken place, (2) the frames in which GC roots were
+                found, and (3) frequently executed methods.
+
+HEAP DUMP       is a complete snapshot of all live objects in the Java
+                heap.  Following distinctions are made:
+
+                ROOT    root set as determined by GC
+                CLS     classes 
+                OBJ     instances
+                ARR     arrays
+
+SITES           is a sorted list of allocation sites.  This identifies
+                the most heavily allocated object types, and the TRACE
+                at which those allocations occurred.
+
+CPU SAMPLES     is a statistical profile of program execution.  The VM
+                periodically samples all running threads, and assigns
+                a quantum to active TRACEs in those threads.  Entries
+                in this record are TRACEs ranked by the percentage of
+                total quanta they consumed; top-ranked TRACEs are
+                typically hot spots in the program.
+
+CPU TIME        is a profile of program execution obtained by measuring
+                the time spent in individual methods (excluding the time
+                spent in callees), as well as by counting the number of
+                times each method is called. Entries in this record are
+                TRACEs ranked by the percentage of total CPU time. The
+                "count" field indicates the number of times each TRACE 
+                is invoked.
+
+MONITOR TIME    is a profile of monitor contention obtained by measuring
+                the time spent by a thread waiting to enter a monitor.
+                Entries in this record are TRACEs ranked by the percentage
+                of total monitor contention time and a brief description
+                of the monitor.  The "count" field indicates the number of 
+                times the monitor was contended at that TRACE.
+
+MONITOR DUMP    is a complete snapshot of all the monitors and threads in 
+                the System.
+
+HEAP DUMP, SITES, CPU SAMPLES|TIME and MONITOR DUMP|TIME records are generated 
+at program exit.  They can also be obtained during program execution by typing 
+Ctrl-\ (on Solaris) or by typing Ctrl-Break (on Win32).
+--- C:\Users\mouda\HeavenMS\jdk8\jdk8u462-b08\jre\bin\server\Xusage.txt (last 200 lines) ---
+    -Xmixed           mixed mode execution (default)
+    -Xint             interpreted mode execution only
+    -Xbootclasspath:<directories and zip/jar files separated by ;>
+                      set search path for bootstrap classes and resources
+    -Xbootclasspath/a:<directories and zip/jar files separated by ;>
+                      append to end of bootstrap class path
+    -Xbootclasspath/p:<directories and zip/jar files separated by ;>
+                      prepend in front of bootstrap class path
+    -Xnoclassgc       disable class garbage collection
+    -Xincgc           enable incremental garbage collection
+    -Xloggc:<file>    log GC status to a file with time stamps
+    -Xbatch           disable background compilation
+    -Xms<size>        set initial Java heap size
+    -Xmx<size>        set maximum Java heap size
+    -Xss<size>        set java thread stack size
+    -Xprof            output cpu profiling data
+    -Xfuture          enable strictest checks, anticipating future default
+    -Xrs              reduce use of OS signals by Java/VM (see documentation)
+    -Xcheck:jni       perform additional checks for JNI functions
+    -Xshare:off	      do not attempt to use shared class data
+    -Xshare:auto      use shared class data if possible (default)
+    -Xshare:on	      require using shared class data, otherwise fail.
+
+The -X options are non-standard and subject to change without notice.
+--- C:\Users\mouda\HeavenMS\HeavenMS-src\HeavenMS-master\tools\MapleIdRetriever\handbook\Setup.txt (last 200 lines) ---
+3991005 - Red "F" - A red "F" to decorate the tree.
+3991006 - Red "G" - A red "G" to decorate the tree.
+3991007 - Red "H" - A red "H" to decorate the tree.
+3991008 - Red "I" - A red "I" to decorate the tree.
+3991009 - Red "J" - A red "J" to decorate the tree.
+3991010 - Red "K" - A red "K" to decorate the tree.
+3991011 - Red "L" - A red "L" to decorate the tree.
+3991012 - Red "M" - A red "M" to decorate the tree.
+3991013 - Red "N" - A red "N" to decorate the tree.
+3991014 - Red "O" - A red "O" to decorate the tree.
+3991015 - Red "P" - A red "P" to decorate the tree.
+3991016 - Red "Q" - A red "Q" to decorate the tree.
+3991017 - Red "R" - A red "R" to decorate the tree.
+3991018 - Red "S" - A red "S" to decorate the tree.
+3991019 - Red "T" - A red "T" to decorate the tree.
+3991020 - Red "U" - A red "U" to decorate the tree.
+3991021 - Red "V" - A red "V" to decorate the tree.
+3991022 - Red "W" - A red "W" to decorate the tree.
+3991023 - Red "X" - A red "X" to decorate the tree.
+3991024 - Red "Y" - A red "Y" to decorate the tree.
+3991025 - Red "Z" - A red "Z" to decorate the tree.
+3991026 - Green "A" - A green "A" to decorate the tree.
+3991027 - Green "B" - A green "B" to decorate the tree.
+3991028 - Green "C" - A green "C" to decorate the tree.
+3991029 - Green "D" - A green "D" to decorate the tree.
+3991030 - Green "E" - A green "E" to decorate the tree.
+3991031 - Green "F" - A green "F" to decorate the tree.
+3991032 - Green "G" - A green "G" to decorate the tree.
+3991033 - Green "H" - A green "H" to decorate the tree.
+3991034 - Green "I" - A green "I" to decorate the tree.
+3991035 - Green "J" - A green "J" to decorate the tree.
+3991036 - Green "K" - A green "K" to decorate the tree.
+3991037 - Green "L" - A green "L" to decorate the tree.
+3991038 - Green "M" - A green "M" to decorate the tree.
+3991039 - Green "N" - A green "N" to decorate the tree.
+3991040 - Green "O" - A green "O" to decorate the tree.
+3991041 - Green "P" - A green "P" to decorate the tree.
+3991042 - Green "Q" - A green "Q" to decorate the tree.
+3991043 - Green "R" - A green "R" to decorate the tree.
+3991044 - Green "S" - A green "S" to decorate the tree.
+3991045 - Green "T" - A green "T" to decorate the tree.
+3991046 - Green "U" - A green "U" to decorate the tree.
+3991047 - Green "V" - A green "V" to decorate the tree.
+3991048 - Green "W" - A green "W" to decorate the tree.
+3991049 - Green "X" - A green "X" to decorate the tree.
+3991050 - Green "Y" - A green "Y" to decorate the tree.
+3991051 - Green "Z" - A green "Z" to decorate the tree.
+3992000 - Santa Ornament - A santa ornament for the tree.
+3992001 - Rudolph Ornament - A Rudolph ornament for the tree.
+3992002 - Mushroom Ornament - A mushroom ornament for the tree.
+3992003 - Pig Ornament - A pig ornament for the tree.
+3992004 - Slime Ornament - A slime ornament for the tree.
+3992005 - Red Gift-Box Ornament - A red gift-box ornament for the tree.
+3992006 - Blue Gift-Box Ornament - A blue gift-box ornament for the tree.
+3992007 - Yellow Gift-Box Ornament - A yellow gift-box ornament for the tree.
+3992008 - Red Star Miniature Bulb - A red star miniature bulb for the tree.
+3992009 - Blue Star Miniature Bulb - A blue star miniature bulb for the tree.
+3992010 - Green Star Miniature Bulb - A green star miniature bulb for the tree.
+3992011 - Pink Star Miniature Bulb - A pink star miniature bulb for the tree.
+3992012 - Orange Star Miniature Bulb - An orange star miniature bulb for the tree.
+3992013 - Red Miniature Bulb - A red miniature bulb for the tree.
+3992014 - Blue Miniature Bulb - A blue miniature bulb for the tree.
+3992015 - Yellow Miniature Bulb - A yellow miniature bulb for the tree.
+3992016 - Green Miniature Bulb - A green miniature bulb for the tree.
+3992017 - Red Ball Ornament - A red ball ornament for the tree.
+3992018 - Blue Ball Ornament - A blue ball ornament for the tree.
+3992019 - Yellow Ball Ornament - A yellow ball ornament for the tree.
+3992020 - Red Sock - A red sock for the tree.
+3992021 - The gingerbread man - The gingerbread man for the tree.
+3992022 - The gingerbread woman - The gingerbread lady for the tree.
+3992023 - Candy Cane - A candy cane for the tree.
+3992024 - Circular Tree Ornament - A circular ornament for the tree.
+3992025 - King-sized Star - A king-sized star for the tree.
+3992026 - Christmas wreath - A christmas wreath for the tree.
+3992027 - Red Candle - A red candle for the tree.
+3992028 - Blue Candle - A blue candle for the tree.
+3992029 - Yellow Candle - A yellow candle for the tree.
+3992030 - Red Candy Canes - Red candy canes for the tree.
+3992031 - Blue Candy Canes - Blue candy canes for the tree.
+3992032 - Yellow Candy Canes - Yellow candy canes for the tree.
+3992033 - Red Fruit Leaves - Red fruit leaves for the tree.
+3992034 - Yellow Fruit Leaves - Yellow fruit leaves for the tree.
+3992035 - Red-Ribboned Giftbox - A red-ribboned giftbox for the tree.
+3992036 - Blue-Ribboned Giftbox - A blue-ribboned giftbox for the tree.
+3992037 - Yellow-Ribboned Giftbox - A yellow-ribboned giftbox for the tree.
+3992038 - Ruldolph Santa Boots - A Rudolph Santa Boots for the tree.
+3992039 - Marker of Heroism - A small figurine embedded with a gem that emanates heroism.  This item allows you to activate and use the Heroic Statues in the Valley of Heroes.
+3992040 - Map of Phantom Forest - This map marks the hidden paths of Phantom Forest, which  are now open to you.
+3992041 - Crimsonwood Keystone - A magical stone that unlocks the gates to the Inner Sanctum of Crimsonwood Keep. 
+3993000 - Lucky Dish - A pair of luck dish out of bamboos. Common in Korean culture
+3993001 - Luck Sack - A red luck sack common in Korean culture.
+3993002 - Bamboo Luck Sack - A pair of luck sack made of bamboo.
+3993003 - Red Luck Sack - A red luck sack with 'luck' written on it.
+3994000 - Alphabet Soup Pasta "A" - An alphabet "A" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994001 - Alphabet Soup Pasta "E" - An alphabet "E" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994002 - Alphabet Soup Pasta "I" - An alphabet "I" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994003 - Alphabet Soup Pasta "L" - An alphabet "L" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994004 - Alphabet Soup Pasta "N" - An alphabet "N" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994005 - Alphabet Soup Pasta "O" - An alphabet "O" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994006 - Alphabet Soup Pasta "P" - An alphabet "P" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994007 - Alphabet Soup Pasta "R" - An alphabet "R" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994008 - Alphabet Soup Pasta "T" - An alphabet "T" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994009 - Alphabet Soup Pasta "X" - An alphabet "X" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994010 - Alphabet Soup Pasta "Y" - An alphabet "Y" made out of pasta. Gather up other alphabets, and bring them all to the Maple Administrator.
+3994011 - Alphabet Soup Pasta "Z" - An alphabet "Z" made out of pasta. Gather up other alphabets, and bring them all to the GM to...
+3994012 - Special "M" - A special alphabet "M". Gather up other alphabets, and bring them all to the Maple Administrator.
+3994013 - Special "S" - A special alphabet "S". Gather up other alphabets, and bring them all to the Maple Administrator.
+3994014 - Special "W" - A special alphabet "W". Gather up other alphabets, and bring them all to the GM to...
+3994015 - Wooden Alphabet C - (no description)
+3994016 - Wooden Alphabet H - (no description)
+3994017 - Alphabet A - An alphabet A. Collect other alphabets and hand them to Maple Administrator to...
+3994018 - Alphabet E - An alphabet E. Collect other alphabets and hand them to Maple Administrator to...
+3994019 - Alphabet H - An alphabet H. Collect other alphabets and hand them to Maple Administrator to...
+3994020 - Alphabet N - An alphabet N. Collect other alphabets and hand them to Maple Administrator to...
+3994021 - Alphabet P - An alphabet P. Collect other alphabets and hand them to Maple Administrator to...
+3994022 - Alphabet R - An alphabet R. Collect other alphabets and hand them to Maple Administrator to...
+3994023 - Alphabet W - An alphabet W. Collect other alphabets and hand them to Maple Administrator to...
+3994024 - Alphabet Y - An alphabet Y. Collect other alphabets and hand them to Maple Administrator to...
+3994085 - Admin's Candle - A small candle from the Admin. This candle will turn itself off when the game is ended.
+3994086 - Birthday Cake Candle - A candle used on the birthday cake for the 4th anniversary of Maplestory. The flame will be blown out when the player exits the game and lit again upon returning to the game.
+3995000 - . - (no description)
+3010040 - The Stirge Seat - A chair hand-crafted by Stirgeman for aspiring superheroes! Recovers 50 HP and 50 MP every 10 seconds.
+3010041 - Skull Throne - A chair crafted within the Phantom Forest, complete with...ornaments...from unlucky travelers. Recovers 50 HP and 50 MP every 10 seconds.
+3010045 - Ice Chair - A chair made out of Ice Queen's ice pieces. Sit on it to recover HP 40 and MP 30 per 10 seconds.
+3994090 - Spices - Mr. Oh sells these rare spices at the Maple 7th Day Market. You can sell them to Abdula for a profit. 
+3994091 - Memorabilia from Thailand - You can find these memorabilia from Thailand at the Maple 7th Day Market. You can sell them to Abdula for a profit. 
+3994092 - Unagi - Lena sells delicious unagi at the Maple  7th Day Market. You can sell it to Abdula for a profit. 
+3994093 - Taxidermy Shark - This taxydermy shark, handmade by Tae Gong himself, can be found at the Maple 7th Day Market. You can sell it to Abdula for a profit. 
+3994094 - Crow-feather Hat - Hanako sells this exquisite at the Maple 7th Day Market. You can sell it to Abdula for a profit. 
+3012005 - Amorian Loveseat - A comfortable, stylish seat that only forms when true love exists between two people.  Recovers 45 HP, 45 MP every 10 seconds.
+3994089 - Agent W's Memory Chip - A memory chip Agent W left with me.  Information regarding 'Master M' is said to be contained in it.  If I don't enter the secret code every hour, it will self-destruct.
+3994096 - ??1 - ??1??.
+3994097 - ??2 - ??2??.
+3994098 - ??3 - ??3??.
+3994099 - ??4 - ??4??.
+3994100 - ??5 - ??5??.
+3010046 - Dragon Chair(Inferno) - Inferno will comfort your body. Recovers 60 HP every 10 seconds.
+3010047 - Dragon Chair(Abyss) - Abyss will comfort your mind. Recovers 60 MP every 10 seconds.
+3010072 - Miwok Chief's Chair - The chair in which the chiefs of the Miwok tribe sat. If you sit in this chair, you can receive the strength of the Miwok ancestors and recover 65MP in 10 seconds.
+3994141 - Cassandra's Candle - A small candle given by Cassandra. This candle will turn off automatically when the game ends.
+3010058 - WorldEnd - You will recover 50 HP every 10 seconds. Perhaps, as you recline, you will find the answer to many of life's questions.
+3010057 - BloodyRose - You will recover 50 HP every 10 seconds. You will experience the might of a conqueror after recovery.
+3010060 - Noblesse Chair - A chair makes you feel like you're sitting in the lap of luxury. Also recovers 50 HP every 10 seconds.
+3010061 - Underneath the Maple Tree・- A white chair created to celebrate Maple Story's 6th Anniversary. Sit on it to restore 35 HP and 10 MP every 10 seconds.
+3010062 - Bamboo Chair  - A chair that restores HP every 10 seconds when used. It's very strong since it was made from bamboo grown on Rien.
+3010063 - Moon and Star Cushion - A pretty cushion shaped like a moon. Recovers 60 HP every 10 seconds.
+3010064 - Male Desert Rabbit Cushion   - 60 HP is restored every 10 seconds if you lean back on this cute Male Desert Rabbit Cushion.
+3010065 - Pink Beach Parasol - A pink beach chair that makes you want to go to the beach. Restores 60 HP every 10 seconds.
+3010066 - Navy Velvet Sofa   - A luxurious velvet sofa dyed with a beautiful shade of navy. Restores 60 HP every 10 seconds.
+3010067 - Red Designer Chair   - A designer chair that glows with a passionate red. Restores 60 HP every 10 seconds.
+3994101 - Cassandra's Giant Star   - A Giant Star that Cassandra made for you. If you hold it during the Starlight Festival, you can receive 1 Star Stamp every hour. \n#cDisappears when you log out of the game.
+3994102 - Letter N for Compass - A Letter N that looks like it would fit perfectly on the Empty Compass.
+3994103 - Letter E for Compass   - A Letter E that looks like it would fit perfectly on the Empty Compass.
+3994104 - Letter W for Compass  - A Letter W that looks like it would fit perfectly on the Empty Compass.
+3994105 - Letter S for Compass  - A Letter S that looks like it would fit perfectly on the Empty Compass.
+3994106 - 6th Anniversary Maple Leaf of Journey  - A Maple Leaf that signifies Maple Story's 6 year journey. Something good will happen if you hold onto it for 1 hour.
+3994115 - Easy Mode  - Easy Mode
+3994116 - Normal Mode  - Normal Mode 
+3994117 - Hard Mode - Hard Mode
+3994118 - Hell Mode   - Hell Mode 
+3994120 - Unknown - An unknown being that has yet to be explained.
+3994121 - Agent M - An Agent. 
+3994122 - Agent C - An Agent. 
+3994123 - Agent E - An Agent. 
+3994124 - Agent S - An Agent. 
+3994125 - Agent O - An Agent. 
+3010043 - Halloween Broomstick Chair - When you sit on the Halloween Broomstick Chair, 50 MP is restored every 10 seconds
+3010071 - Mini Shinsoo Chair - When you rest on the Shinsoo, 50 HP and 50 MP are restored every 10 seconds
+3010085 - Olivia's Chair - An eerie looking chair that resembles Olivia. Recovers 40 HP and 35 MP every 10 seconds
+3010098 - TV Recliner - A new chair to recline and relax in throughout the Thanksgiving holiday.\nRecovers 60 HP and 30 MP every 10 seconds.
+3010116 - The Spirit of Rock Chair - A new chair that makes you feel like a Rock Star.\nRecovers 60 HP and 30 MP every 10 seconds.
+3994126 - Aran Memory Fragments - The Arans are reviving.
+3994127 - Aran Memory Fragments - The Arans are reviving.
+3994128 - Aran Memory Fragments - The Arans are reviving.
+3994129 - Aran Memory Fragments - The Arans are reviving.
+3994130 - Aran Memory Fragments - The Arans are reviving.
+3994131 - Aran Memory Fragments - The Arans are reviving.
+3994132 - Aran Memory Fragments - The Arans are reviving.
+3994133 - Aran Memory Fragments - The Arans are reviving.
+3994134 - Aran Memory Fragments - The Arans are reviving.
+3994135 - Aran Memory Fragments - The Arans are reviving.
+3994136 - Aran Memory Fragments - The Arans are reviving.
+3994137 - Aran Memory Fragments - The Arans are reviving.
+3994138 - Ice Crystal - A solid ice crystal that contains Maha Charm. Hold onto it for one hour and the crystal will melt, enabling you to acquire the Charm.
+3994139 - Maha Charm - A charm that contains protection from Maha, the spirit of Polearm. Take this to Cassandra for a chance to answer questions and receive prizes.
+3010101 - Christmas Gift Box - A huge X-mas Gift Box big enough to fit a grownup. It has a message that reads, "I am here for you." Sitting in it will recover 50 HP and MP every 10 seconds.
+3010073 - Giant Pink Bean Cushion - A cushion that resembles Pink Bean, the underling of the Black Mage. Leaning against the cushion and resting will recover 50 HP and 30 MP every 10 seconds. 
+3010099 - Cuddly Polar Bear - Cuddling with the Polar Bear for some cozy, comfy rest will recover 50 HP and 50 MP every 10 seconds.
+3010044 - Winter Red Chair  - A chair with a big umbrella. Recovers 30 HP and 30 MP every 10 seconds.
+3010106 - Ryko Chair - Snuggle up with Aran's loyal mount, Ryko, to recover 50 HP and MP every 10 seconds.
+3010111 - Tiger Skin Chair - Lean back on this imposing Tiger Skin Chair to restore 50 HP and 30 MP every 10 seconds.
+3010080 - Swing on the Persimmon Tree - There is a swing on the Persimmon Tree with ripe persimmons.
+3010081 - ??? ?? ?? - ??? ??? ?? ??? ? ??? ??? ??? ? ? ??.
+3010082 - ??? ?? ?? - ??? ??? ?? ??? ? ??? ??? ??? ? ? ??.
+3010083 - ??? ?? ?? - ??? ??? ??? ?? ???? ?? ??? ??? ? ? ??.
+3010084 - ??? ?? ?? - ??? ??? ??? ?? ?? ???? ??? ? ? ??.
+3010092 - Witch's Broomstick - Hold onto the Broomstick so you don't fall off.
+3012010 - Half-Heart Chocolate Cake Chair - Sink yourself into this heavenly cake chair next to someone else who owns it as well, and watch it create a scrumptious effect! Mmm, this chair is so delicious you'll recover 50 HP every 10 seconds.
+3012011 - Chocolate Fondue Chair - Yummy! Use this chair next to someone else who's also using it, and a mouth-watering chocolate fondue appears. Smack your lips and dream about treats as you recover 50 HP every 10 seconds. 
+3010069 - Yellow Robot Chair - Perch yourself on the hand of this powerful yellow robot to recover 50 HP and 30 MP every 10 seconds.
+\n==== Client WZ presence ====
+UI.wz: 26.95 MB, Modified=2010/02/21 3:29:00
+Etc.wz: 1.15 MB, Modified=2010/02/17 9:05:00
+String.wz: 3.1 MB, Modified=2010/02/17 17:15:00
+Map.wz: 606.01 MB, Modified=2010/02/17 9:13:00
+dinput8.dll: PRESENT
+\n==== Heuristic verdict ====
+If world list remains blank with listeners OK, suspect WZ mismatch (UI.wz WorldSelect) or IPv6/localhost mismatch; force 127.0.0.1 in client.
+\n==== Next steps ====
+1) Ensure server binds to 127.0.0.1 and shows 'Registered channel' in logs.
+2) Client: serverIP=127.0.0.1:8484, run as Admin, XP SP3 compat, DPI override.
+3) If still white, replace UI.wz first with a known-good v83 (same pack as Etc/String/Map).
+4) As last resort, full v83 pack from same source (no mix).
+\n==== Summary ====

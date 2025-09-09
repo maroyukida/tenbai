@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Daily Rising (24h)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid #e5e7eb; padding: 8px; text-align: left; font-size: 14px; }
+    th { background: #f8fafc; position: sticky; top: 0; }
+    img.thumb { width: 120px; height: 68px; object-fit: cover; border-radius: 6px; }
+    .muted { color: #6b7280; }
+    .badge { display:inline-block; padding:2px 6px; border:1px solid #e5e7eb; border-radius:9999px; font-size:12px; background:#f3f4f6; margin-left:6px; }
+    .toolbar { display:flex; gap:10px; align-items:center; margin-bottom:10px; flex-wrap: wrap; }
+    .pager { margin-top: 10px; display: flex; gap: 8px; align-items: center; }
+    .pager a { padding: 6px 10px; border: 1px solid #e5e7eb; border-radius: 6px; text-decoration: none; color: #111827; }
+    .pager .disabled { color: #9ca3af; border-color: #f3f4f6; }
+  </style>
+</head>
+<body>
+  <h1>Daily Rising (24h)</h1>
+  <form class="toolbar" method="get" action="/daily">
+    <label>
+      分類
+      <select name="vcat">
+        <option value="" {{ '' == q_vcat and 'selected' or '' }}>All</option>
+        {% for c in vcats %}
+          <option value="{{ c }}" {{ c == q_vcat and 'selected' or '' }}>{{ c }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      表示件数
+      <input type="number" name="per" value="{{ per }}" min="50" max="500" step="50"/>
+    </label>
+    <button type="submit">更新</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>サムネ</th>
+        <th>タイトル / チャンネル</th>
+        <th>分類</th>
+        <th>カテゴリ</th>
+        <th>Δ1h</th>
+        <th>Δ3h</th>
+        <th>Δ6h</th>
+        <th>likes/h</th>
+        <th>再生数</th>
+        <th>スコア</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for v in items %}
+        <tr>
+          <td><a href="https://www.youtube.com/watch?v={{ v.video_id }}" target="_blank" rel="noopener"><img class="thumb" src="{{ v.thumb_hq }}" alt="thumb" loading="lazy"></a></td>
+          <td>
+            <div><a href="https://www.youtube.com/watch?v={{ v.video_id }}" target="_blank" rel="noopener">{{ v.title }}</a></div>
+            <div class="muted">{{ v.published_at|to_jst }}</div>
+          </td>
+          <td>{% if v.vcat %}<span class="badge">{{ v.vcat }}</span>{% else %}-{% endif %}</td>
+          <td>{{ v.category_name or '-' }}</td>
+          <td>{{ '%.0f' % v.d1h if v.d1h is not none else '-' }}</td>
+          <td>{{ '%.0f' % v.d3h if v.d3h is not none else '-' }}</td>
+          <td>{{ '%.0f' % v.d6h if v.d6h is not none else '-' }}</td>
+          <td>{{ '%.2f' % v.likes_per_hour if v.likes_per_hour is not none else '-' }}</td>
+          <td>{{ v.current_views or 0 }}</td>
+          <td>{{ '%.3f' % v.score }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% set total_pages = (total // per) + (1 if total % per != 0 else 0) %}
+  <div class="pager">
+    {% set prev = page - 1 %}
+    {% set next = page + 1 %}
+    {% if prev >= 1 %}
+      <a href="?vcat={{ q_vcat }}&per={{ per }}&page={{ prev }}">« Prev</a>
+    {% else %}
+      <span class="disabled">« Prev</span>
+    {% endif %}
+    <span class="muted">Page {{ page }} / {{ total_pages }}</span>
+    {% if next <= total_pages %}
+      <a href="?vcat={{ q_vcat }}&per={{ per }}&page={{ next }}">Next »</a>
+    {% else %}
+      <span class="disabled">Next »</span>
+    {% endif %}
+  </div>
+</body>
+</html>
+

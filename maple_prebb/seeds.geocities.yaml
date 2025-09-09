@@ -1,0 +1,22 @@
+project: maple-preBB-geocities
+time_range:
+  from: 2003
+  to: 20091231
+sources:
+  - pattern: "*.geocities.jp/*"
+    match: domain
+cdx:
+  collapse: "timestamp:8"
+  fields: ["timestamp","original","mimetype","statuscode","digest","length"]
+  page_size: 50
+  max_pages: 1
+fetch:
+  rps: 1.0
+  retries: 2
+  timeout_sec: 20
+store:
+  warc_dir: "./archive/warc"
+  meta_dir: "./archive/meta"
+  index: "./index/maple_geo.db"
+content_filter:
+  keywords_any: ["メイプル", "メイプルストーリー", "MapleStory", "maple"]

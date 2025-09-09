@@ -1,0 +1,15 @@
+﻿project: test
+sources:
+  - pattern: "example.com/*"
+    match: prefix
+cdx:
+  collapse: "timestamp:8"
+  fields: ["timestamp","original","mimetype","statuscode","digest","length"]
+fetch:
+  rps: 1.0
+  retries: 1
+  timeout_sec: 20
+store:
+  warc_dir: "./archive/warc"
+  meta_dir: "./archive/meta"
+  index: "./index/maple_test.db"

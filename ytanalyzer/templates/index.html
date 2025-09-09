@@ -1,0 +1,84 @@
+{% extends "layout.html" %}{% block body %}
+<div class="toolbar">
+  <form class="row g-2 align-items-end" method="get">
+    <div class="col-md-4 col-lg-4">
+      <select class="form-control" name="tag">
+        <option value="">ジャンル（全て）</option>
+        {% for genre in top_genres %}
+        <option value="{{ genre[0] }}" {% if tag == genre[0] %}selected{% endif %}>{{ genre[0] }} ({{ genre[1] }})</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="small text-muted mb-1">並び</label>
+      <div class="btn-group w-100" role="group">
+        <input type="radio" class="btn-check" name="sort" value="date" id="sort-date" {% if sort=='date' %}checked{% endif %}>
+        <label class="btn btn-outline-primary" for="sort-date">新着</label>
+        <input type="radio" class="btn-check" name="sort" value="subs" id="sort-subs" {% if sort=='subs' %}checked{% endif %}>
+        <label class="btn btn-outline-primary" for="sort-subs">登録者</label>
+        <input type="radio" class="btn-check" name="sort" value="views" id="sort-views" {% if sort=='views' %}checked{% endif %}>
+        <label class="btn btn-outline-primary" for="sort-views">再生数</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label class="small text-muted mb-1">件数</label>
+      <select class="form-select" name="per">
+        {% for n in [40,80,120] %}<option value="{{n}}" {% if per==n %}selected{% endif %}>{{n}}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2 d-grid"><label class="small text-muted mb-1">&nbsp;</label><button class="btn btn-primary">適用</button></div>
+  </form>
+  <div class="toolbar-summary">
+    <div class="text-muted">総件数: <strong>{{ total }}</strong></div>
+    <div class="text-muted">上位ジャンル:
+      {% for t,c in top5 %}<a class="badge rounded-pill bg-secondary text-decoration:none" href="/?tag={{ t|urlencode }}">{{ t }} ({{ c }})</a>{% endfor %}
+    </div>
+    <div class="ms-auto d-flex gap-2">
+      <a class="btn btn-sm btn-outline-secondary" href="/export.csv?{{ qs }}">CSV</a>
+      <a class="btn btn-sm btn-outline-secondary" href="/export.json?{{ qs }}">JSON</a>
+    </div>
+  </div>
+</div>
+
+<div id="cardContainer" class="my-2">
+{% for r in rows %}
+  <div class="channel-list-item">
+    <div class="list-item__icon"><div class="icon-placeholder">{{ (r.channel_name or "C")[0] }}</div></div>
+    <div class="list-item__main">
+      <div class="name"><a href="{{ r['detail_url'] }}" target="_blank">{{ r.channel_name or r.channel_id }}</a></div>
+      <div class="description">
+        {% set latest_videos = videos_map.get(r.channel_id, []) %}
+        {% if latest_videos %}
+          {{ latest_videos | map(attribute='video_title') | join(' / ') }}
+        {% else %}動画情報なし{% endif %}
+      </div>
+      <div class="tags">
+        {% if r.auto_tags %}<a href="/?tag={{ r.auto_tags|urlencode }}" class="badge badge-primary-tag">{{ r.auto_tags }}</a>{% endif %}
+        {% for t in (r.tags or "").split("|")[:2] %}
+          {% if t and t != r.auto_tags %}<a href="/?tag={{ t|urlencode }}" class="badge badge-secondary-tag">{{ t }}</a>{% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="list-item__stats">
+      <span class="stat-label">登録者</span>
+      <span class="stat-value stat-prominent">{{ r.subs | int if r.subs else "-" }}</span>
+      <span class="stat-label">総再生</span>
+      <span class="stat-value stat-prominent">{{ r.views | int if r.views else "-" }}</span>
+    </div>
+    <div class="list-item__side-info">
+      {% if r.ban_date %}<div class="ban-date-badge">BAN: {{ r.ban_date }}</div>{% endif %}
+      <div class="additional-stats">
+        <span class="stat-label">動画数</span><span class="stat-value">{{ r.videos | int if r.videos else "-" }}</span>
+        <span class="stat-label">開設日</span><span class="stat-value">{{ r.opened_on or "-"}}</span>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+<nav class="mt-3"><ul class="pagination">
+  <li class="page-item {% if page<=1 %}disabled{% endif %}"><a class="page-link" href="?{{ qs_no_page }}&page={{ page-1 }}&per={{ per }}">前へ</a></li>
+  <li class="page-item disabled"><span class="page-link">page {{ page }}</span></li>
+  <li class="page-item {% if rows|length < per %}disabled{% endif %}"><a class="page-link" href="?{{ qs_no_page }}&page={{ page+1 }}&per={{ per }}">次へ</a></li>
+</ul></nav>
+{% endblock %}

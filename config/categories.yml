@@ -1,0 +1,274 @@
+﻿categories:
+  - name: Gaming
+    includes:
+      - '(螳滓ｳ－繝励Ξ繧､|謾ｻ逡･|繝ｩ繝ｳ繧ｯ|繧ｬ繝√Ε|蟇ｾ謌ｦ|繧ｭ繝ｫ髮・繧ｽ繝ｭ繝ｩ繝ｳ)'
+      - '^(繝槭う繧ｯ繝ｩ|Minecraft|APEX|繧ｨ繝ｼ繝壹ャ繧ｯ繧ｹ|繧ｹ繝励Λ|蜴溽･桍繝輔か繝ｼ繝医リ繧､繝・VALORANT)'
+      - '#(apex|minecraft|valorant|splatoon|genshin|fortnite)'
+    excludes:
+      - '(繝代メ繝ｳ繧ｳ|遶ｶ鬥ｬ|遶ｶ濶・螳昴￥縺・'
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 6
+
+  - name: Music
+    includes:
+      - '(豁後▲縺ｦ縺ｿ縺毫蠑ｾ縺・※縺ｿ縺毫cover|繧ｫ繝舌・|MV|PV|繝懊き繝ｭ|Vocaloid|豁梧棧|蠑ｾ縺崎ｪ槭ｊ)'
+      - '#(cover|utaite|vocaloid|mv)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 6
+
+  - name: Entertainment
+    includes:
+      - '(莨∫判|繝峨ャ繧ｭ繝ｪ|繧・▲縺ｦ縺ｿ縺毫螟ｧ蝟懷茜|螟ｧ鬟溘＞|讀懆ｨｼ|繝ｪ繧｢繧ｯ繧ｷ繝ｧ繝ｳ|shorts)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: People & Blogs
+    includes:
+      - '(Vlog|譌･蟶ｸ|繝ｫ繝ｼ繝・ぅ繝ｳ|證ｮ繧峨＠|繧ｫ繧ｸ繝･繧｢繝ｫ|螳ｶ譌楯譌･險・'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: News & Politics
+    includes:
+      - '(騾溷ｱ|莨夊ｦ弓隗｣隱ｬ|繝九Η繝ｼ繧ｹ|謾ｿ豐ｻ|謾ｿ遲翻蝗ｽ莨嘶險倩・ｼ夊ｦ弓迚ｩ萓｡|轤ｺ譖ｿ|蜀・ｮ榎驕ｸ謖・'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 2}
+    threshold: 6
+
+  - name: Sports
+    includes:
+      - '(隧ｦ蜷・繝繧､繧ｸ繧ｧ繧ｹ繝・繝上う繝ｩ繧､繝・繧ｴ繝ｼ繝ｫ|繝帙・繝繝ｩ繝ｳ|螳滓ｳ∽ｸｭ邯・'
+      - '(繧ｵ繝・き繝ｼ|驥守帥|繝舌せ繧ｱ|繝・ル繧ｹ|蜊鍋帥|繝ｩ繧ｰ繝薙・|繝舌Ξ繝ｼ繝懊・繝ｫ)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Tech
+    includes:
+      - '(繝ｬ繝薙Η繝ｼ|髢句ｰ－繧ｬ繧ｸ繧ｧ繝・ヨ|繧ｹ繝槭・|PC|繧ｭ繝ｼ繝懊・繝榎閾ｪ菴弃C|AI|逕滓・|繝励Ο繝ｳ繝励ヨ)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Education
+    includes:
+      - '(隗｣隱ｬ|隰帛ｺｧ|蜈･髢|蜍牙ｼｷ|蟄ｦ鄙竹How to|Howto|繝√Η繝ｼ繝医Μ繧｢繝ｫ)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: VTuber
+    includes:
+      - '(VTuber|縺ｶ縺・■繧・・縺ｰ繝ｼ|縺ｫ縺倥＆繧薙§|繝帙Ο繝ｩ繧､繝翻hololive|蛻・ｊ謚懊″|蜃ｸ蠕・■)'
+      - '#(vtuber|hololive|nijisanji)'
+    excludes: []
+    weight: {title: 2, tags: 3, desc: 1}
+    threshold: 6
+
+  - name: Finance
+    includes:
+      - '(謚戊ｳ・譬ｪ|豎ｺ邂慾逶ｸ蝣ｴ|莉ｮ諠ｳ騾夊ｲｨ|繝薙ャ繝医さ繧､繝ｳ|轤ｺ譖ｿ|FX)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 6
+
+  # --- YouTube迚ｹ譛峨ず繝｣繝ｳ繝ｫ ---
+  - name: Kirinuki
+    includes:
+      - '(蛻・ｊ謚懊″|繝上う繝ｩ繧､繝・蜷榊ｴ髱｢|逾槫屓|蜴ｳ驕ｸ|繝繧､繧ｸ繧ｧ繧ｹ繝・'
+      - '(縺ｾ縺ｨ繧・蜍慕判|髮・|蛻・ｊ謚懊″髮・'
+    excludes:
+      - '(繝九Η繝ｼ繧ｹ縺ｾ縺ｨ繧－萓｡譬ｼ縺ｾ縺ｨ繧－逶ｸ蝣ｴ縺ｾ縺ｨ繧・'
+    weight: {title: 3, tags: 3, desc: 1}
+    threshold: 4
+
+  - name: Yukkuri
+    includes:
+      - '(繧・▲縺上ｊ隗｣隱ｬ|繧・▲縺上ｊ螳滓ｳ－繧・▲縺上ｊ譛苓ｪｭ|繧・▲縺上ｊ闌ｶ逡ｪ)'
+      - '#(yukkuri)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 3
+
+  - name: Nanj
+    includes:
+      - '(縺ｪ繧笛|縺ｪ繧難ｽ掛縺ｪ繧屠|J豌掃繧ｱ繝ｳ繝｢|雖悟┫)'
+    excludes:
+      - '(髻灘嵜|蜊慾蜊嶺ｺｬ)'
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 3
+
+  - name: Sukatto
+    includes:
+      - '(繧ｹ繧ｫ繝・→|縺吶°縺｣縺ｨ|繧ｹ繧ｫ繝・→縺吶ｋ隧ｱ|閭ｸ縺後せ繧ｫ繝・→|豁ｦ蜍・ｼ・'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 4
+
+  - name: ASMR
+    includes:
+      - '(ASMR|逹｡逵逕ｨ|蝗√″|閠ｳ縺九″|閠ｳ繝槭ャ繧ｵ繝ｼ繧ｸ|閠ｳ闊舌ａ|迺ｰ蠅・浹|KU100)'
+      - '#(asmr|sleep)'
+    excludes: []
+    weight: {title: 3, tags: 3, desc: 1}
+    threshold: 4
+
+  - name: 2ch/5ch
+    includes:
+      - '(2ch|5ch|・偵■繧・ｓ|・抵ｽ・ｽ・2縺｡繧・ｓ|5縺｡繧・ｓ|繧ｹ繝ｬ|繧ｹ繝ｬ豌掃繧ｹ繝ｬ荳ｻ|繧ｹ繝ｬ縺ｾ縺ｨ繧－繧ｹ繝ｬ繝・ラ)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 3
+
+# --- 諡｡蠑ｵ繧ｸ繝｣繝ｳ繝ｫ・磯ｫ倬ｻ蠎ｦ繝ｯ繝ｼ繝我ｸｭ蠢・ｼ剰ｪ､辷・＠縺ｫ縺上＞陦ｨ迴ｾ・・---
+  - name: Anime & Manga
+    includes:
+      - '(繧｢繝九Γ諢滓Φ|閠・ｯ毫繝阪ち繝舌Ξ|譛邨ょ屓|菴懃判|蜴滉ｽ忿繝槭Φ繧ｬ|貍ｫ逕ｻ|繧ｸ繝｣繝ｳ繝慾繧｢繝九た繝ｳ)'
+      - '#(anime|manga)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Idol
+    includes:
+      - '(繧｢繧､繝峨Ν|謠｡謇倶ｼ嘶逕溷・逵毫蜀吶Γ莨嘶謗ｨ縺励Γ繝ｳ|邂ｱ謗ｨ縺慾荵・惠蝮・讚ｻ蝮・譌･蜷大揩|AKB|HKT|SKE|NMB)'
+      - '#(idol)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: K-POP
+    includes:
+      - '(K-?POP|髻灘嵜繧｢繧､繝峨Ν|繧ｫ繝繝酢髻ｳ讌ｽ逡ｪ邨лfancam|蠢懈抄豕怖繝壹Φ)'
+      - '#(kpop|comeback|fancam)'
+    excludes: []
+    weight: {title: 3, tags: 3, desc: 1}
+    threshold: 5
+
+  - name: Food & Cooking
+    includes:
+      - '(繝ｬ繧ｷ繝培邁｡蜊俶侭逅・菴懊ｊ譁ｹ|鬟ｯ繝・Ο|鬟溘∋豁ｩ縺鋼鬟溘Ξ繝掟B邏壹げ繝ｫ繝｡|閾ｪ轤掛縺雁ｼ∝ｽ倒繧ｹ繧､繝ｼ繝л繧ｰ繝ｫ繝｡)'
+      - '#(recipe|cooking|gourmet)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Beauty & Makeup
+    includes:
+      - '(繝｡繧､繧ｯ|繧ｳ繧ｹ繝｡|鄒主ｮｹ|繧ｹ繧ｭ繝ｳ繧ｱ繧｢|繝倥い|鬮ｪ雉ｪ謾ｹ蝟л繧ｫ繝ｩ繝ｼ|繧ｻ繝ｫ繝輔き繝・ヨ|蝙｢謚懊￠)'
+      - '#(makeup|cosme|skincare)'
+    excludes: []
+    weight: {title: 2, tags: 3, desc: 1}
+    threshold: 5
+
+  - name: Fitness
+    includes:
+      - '(遲九ヨ繝ｬ|繝ｯ繝ｼ繧ｯ繧｢繧ｦ繝・繝繧､繧ｨ繝・ヨ|逞ｩ縺帙ｋ|閼りが辯・┥|HIIT|螳ｶ繝医Ξ|繝励Ο繝・う繝ｳ|繧ｹ繝医Ξ繝・メ)'
+      - '#(fitness|workout|diet|hiit)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: DIY & Crafts
+    includes:
+      - '(DIY|閾ｪ菴忿譛ｨ蟾･|蟾･菴忿繝ｪ繝｡繧､繧ｯ|繝上Φ繝峨Γ繧､繝榎蟾･蜈ｷ|蝪苓｣・'
+      - '#(diy|handmade|woodworking)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Outdoors & Camping
+    includes:
+      - '(繧ｭ繝｣繝ｳ繝慾繧ｽ繝ｭ繧ｭ繝｣繝ｳ繝慾辟壹″轣ｫ|逋ｻ螻ｱ|繝・Φ繝・繧ｮ繧｢|霆贋ｸｭ豕掛繧｢繧ｦ繝医ラ繧｢)'
+      - '#(camp|camping|outdoor)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Fishing
+    includes:
+      - '(驥｣繧掛繝ｫ繧｢繝ｼ|繧ｿ繧､繝ｩ繝酢繧ｸ繧ｮ繝ｳ繧ｰ|繝舌せ驥｣繧掛貂捺ｵ－蝣､髦ｲ)'
+      - '#(fishing|lure|bassfishing)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Cars & Bikes
+    includes:
+      - '(霆願ｼ榎繝峨Λ繝ｬ繧ｳ|繝峨Λ繝ｬ繧ｳ譏蜒楯莠区腐|讀懷撫|繝舌う繧ｯ|繝・・繝ｪ繝ｳ繧ｰ|謨ｴ蛯處繧ｫ繧ｹ繧ｿ繝|霆翫Ξ繝薙Η繝ｼ)'
+      - '#(bike|moto|dashcam|drive)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Railway
+    includes:
+      - '(驩・％|謦ｮ繧企延|荵励ｊ驩л霆顔ｪ倒逋ｺ霆翫Γ繝ｭ繝・ぅ|E233|譁ｰ蟷ｹ邱嘶迚ｹ諤･)'
+      - '#(railway|train)'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Gambling
+    includes:
+      - '(繝代メ繝ｳ繧ｳ|繝代メ繧ｹ繝ｭ|繧ｹ繝ｭ繝・ヨ|遶ｶ鬥ｬ|遶ｶ霈ｪ|遶ｶ濶・繝懊・繝医Ξ繝ｼ繧ｹ|闊溷虻|鬥ｬ蛻ｸ)'
+      - '#(pachi|keiba|keirin|kyotei)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 6
+
+  - name: Relationships
+    includes:
+      - '(諱区・|蟀壽ｴｻ|繝槭ャ繝√Φ繧ｰ繧｢繝励Μ|蜃ｺ莨壹＞|螟ｱ諱弓豬ｮ豌慾菫ｮ鄒・ｴ|螟ｫ蟀ｦ|繧ｫ繝・・繝ｫ|髮｢蟀・'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Urban Legends
+    includes:
+      - '(驛ｽ蟶ゆｼ晁ｪｬ|髯ｰ隰隲翻譛ｪ隗｣豎ｺ莠倶ｻｶ|閠・ｯ毫諤悶＞隧ｱ|諤ｪ隲・蠢・怺|繝帙Λ繝ｼ)'
+      - '#(creepy|horror|scary)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 5
+
+  - name: Kids
+    includes:
+      - '(繧ｭ繝・ぜ|縺翫ｂ縺｡繧ポ遏･閧ｲ|繧｢繝ｳ繝代Φ繝槭Φ|縺励∪縺倥ｍ縺・縺斐▲縺馴♀縺ｳ|髢句ｰ√＃縺｣縺・'
+    excludes: []
+    weight: {title: 2, tags: 2, desc: 1}
+    threshold: 5
+excludes_global:
+  - '(http|https|www\.|縲娠R縲掃PR)'
+
+  - name: ゆっくり解説
+    includes:
+      - '(ゆっくり解説|ゆっくり実況|ゆっくり茶番)'
+      - '#(yukkuri)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 3
+
+  - name: なんJ
+    includes:
+      - '(なんJ|なんｊ|なんj|J民)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 3
+
+  - name: 切り抜き
+    includes:
+      - '(切り抜き|ハイライト|名場面|神回|ダイジェスト|まとめ動画|まとめ)'
+    excludes: []
+    weight: {title: 3, tags: 3, desc: 1}
+    threshold: 4
+
+  - name: スカッと
+    includes:
+      - '(スカッと|すかっと|胸がスカッと|武勇伝|ざまぁ)'
+    excludes: []
+    weight: {title: 3, tags: 2, desc: 1}
+    threshold: 4

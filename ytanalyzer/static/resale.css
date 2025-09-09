@@ -1,0 +1,21 @@
+/* Resale Radar toC styling */
+:root { --bg:#fff; --fg:#222; --muted:#6c757d; --card:#fff; --border:#eaeaea; --badge:#eef1f6; --badge-fg:#333; }
+@media(prefers-color-scheme:dark){ :root{ --bg:#121212; --fg:#e5e5e5; --muted:#9aa1a9; --card:#1a1a1a; --border:#2a2a2a; --badge:#2a2f37; --badge-fg:#d7dbe1; } }
+
+.score-high { color:#0f5132; background:#d1e7dd; border-radius:12px; padding:.15rem .5rem; font-weight:600; }
+.score-mid  { color:#664d03; background:#fff3cd; border-radius:12px; padding:.15rem .5rem; font-weight:600; }
+.score-low  { color:#084298; background:#cfe2ff; border-radius:12px; padding:.15rem .5rem; }
+.kpi-chip   { display:inline-block; margin-right:8px; padding:4px 10px; border:1px solid var(--border); border-radius:9999px; font-size:12px; background:var(--badge); color:var(--badge-fg) }
+
+/* Hero and buttons */
+.rr-hero { margin: 14px 0 10px; }
+.rr-title { font-weight: 800; letter-spacing: .02em; }
+.rr-sub { opacity: .9 }
+.btn-cta { background:#4e67ff; border:none; color:#fff; padding:8px 14px; border-radius:12px; box-shadow:0 6px 14px rgba(78,103,255,.25); }
+.btn-cta:hover { filter:brightness(1.05) }
+
+/* Card polish */
+.card { transition: transform .12s ease, box-shadow .12s ease }
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.18) }
+.thumb { box-shadow: 0 2px 6px rgba(0,0,0,.18) }
+.pill:hover { filter: brightness(1.05) }

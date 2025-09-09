@@ -1,0 +1,21 @@
+project: maple-preBB-small
+time_range:
+  from: 2003
+  to: 20091231
+sources:
+  - pattern: "wikiwiki.jp/*"
+    match: prefix
+cdx:
+  collapse: "timestamp:8"
+  fields: ["timestamp","original","mimetype","statuscode","digest","length"]
+  page_size: 50
+  max_pages: 1
+fetch:
+  rps: 1.2
+  retries: 3
+  timeout_sec: 20
+store:
+  warc_dir: "./archive/warc"
+  meta_dir: "./archive/meta"
+  index: "./index/maple_small.db"
+# Keep everything for demo; refine later with content_filter if needed

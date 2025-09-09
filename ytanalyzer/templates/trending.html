@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Trending</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif; margin: 20px; }
+    .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 12px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; background: white; }
+    .thumb { aspect-ratio: 16/9; width: 100%; object-fit: cover; }
+    .meta { padding: 8px 10px; }
+    .title { font-size: 14px; font-weight: 600; margin: 0 0 4px 0; }
+    .muted { color: #6b7280; font-size: 12px; }
+    h2 { margin: 18px 0 8px; font-size: 18px; }
+    h1 { margin: 0 0 10px; font-size: 22px; }
+    .section { margin-bottom: 26px; }
+  </style>
+  <script>
+    // no-op
+  </script>
+  <link rel="preconnect" href="https://i.ytimg.com/">
+</head>
+<body>
+  <h1>Trending</h1>
+  <p class="muted" style="margin:6px 0 12px;">カテゴリ×Short/Long の上位を簡易表示します。詳細は <a href="/trending?view=list">List表示</a>をご利用ください。</p>
+              <p class="muted" style="margin:6px 0 12px;">カテゴリ×Short/Long の上位を簡易表示します。詳細は <a href="/trending?view=list">List表示</a>をご利用ください。</p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
+</body>
+</html>
+
+

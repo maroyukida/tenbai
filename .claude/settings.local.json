@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja\\yutura_dump\\progress/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja\\yutura_dump/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja\\yutura_dump\\progress/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja\\yutura_dump\\progress/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v7_ja/**)",
+      "Bash(dir)",
+      "Bash(python:*)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v6/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v6\\yutura_dump/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v6\\yutura_dump\\progress/**)",
+      "Bash(pip install:*)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v6/**)",
+      "Read(C:\\Users\\mouda\\yutura_toolkit\\yutura_toolkit_gui_v6/**)",
+      "Read(C:\\Users\\mouda/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

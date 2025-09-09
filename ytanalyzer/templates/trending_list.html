@@ -1,0 +1,142 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Trending List</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif; margin: 20px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid #e5e7eb; padding: 8px; text-align: left; font-size: 14px; }
+    th { background: #f8fafc; }
+    img.thumb { width: 120px; height: 68px; object-fit: cover; border-radius: 6px; }
+    .muted { color: #6b7280; }
+    .toolbar { display: flex; gap: 12px; align-items: center; margin: 8px 0 12px; flex-wrap: wrap; padding: 6px 0; }
+    select, input[type="number"] { padding: 6px 8px; border: 1px solid #e5e7eb; border-radius: 6px; }
+    .badge { display:inline-block; padding:2px 6px; border:1px solid #e5e7eb; border-radius:9999px; font-size:12px; background:#f3f4f6; margin-left:6px; }
+    .head { display:flex; justify-content: space-between; align-items:flex-end; margin-bottom: 4px; gap: 8px; }
+    .tabs a { padding:6px 10px; border:1px solid #e5e7eb; border-radius:9999px; text-decoration:none; color:#111827; background:#fff; margin-left:6px; }
+    .tabs .active { background:#111827; color:#fff; border-color:#111827; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="head">
+    <h1>トレンド（一覧）</h1>
+    <div class="tabs">
+      <a class="{{ (q_type or '')=='' and 'active' or '' }}" href="?view=list&type=&category={{ q_cat }}&vcat={{ q_vcat }}&sort={{ sort }}&per={{ per }}">すべて</a>
+      <a class="{{ (q_type or '')=='short' and 'active' or '' }}" href="?view=list&type=short&category={{ q_cat }}&vcat={{ q_vcat }}&sort={{ sort }}&per={{ per }}">ショート</a>
+      <a class="{{ (q_type or '')=='long' and 'active' or '' }}" href="?view=list&type=long&category={{ q_cat }}&vcat={{ q_vcat }}&sort={{ sort }}&per={{ per }}">通常</a>
+      <a href="/trending">グリッド</a>
+    </div>
+  </div>
+  <form class="toolbar" method="get" action="/trending">
+    <input type="hidden" name="view" value="list"/>
+    <label>並び
+      <select name="sort">
+        <option value="score" {{ (sort or 'score') == 'score' and 'selected' or '' }}>スコア</option>
+        <option value="likes" {{ (sort or 'score') == 'likes' and 'selected' or '' }}>高評価/時</option>
+        <option value="views" {{ (sort or 'score') == 'views' and 'selected' or '' }}>再生数</option>
+        <option value="published" {{ (sort or 'score') == 'published' and 'selected' or '' }}>公開が新しい</option>
+      </select>
+    </label>
+    <label>種別
+      <select name="type">
+        <option value="" {{ '' == q_type and 'selected' or '' }}>すべて</option>
+        <option value="short" {{ 'short' == q_type and 'selected' or '' }}>ショート</option>
+        <option value="long" {{ 'long' == q_type and 'selected' or '' }}>通常</option>
+      </select>
+    </label>
+    {% if vcats %}
+    <label>ジャンル（独自）
+      <select name="vcat">
+        <option value="" {{ '' == q_vcat and 'selected' or '' }}>すべて</option>
+        {% for c in vcats %}
+          <option value="{{ c }}" {{ c == q_vcat and 'selected' or '' }}>{{ c|cat_ja }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    {% endif %}
+    <label>カテゴリ（YouTube）
+      <select name="category">
+        <option value="" {{ '' == q_cat and 'selected' or '' }}>すべて</option>
+        {% for c in cats %}
+          <option value="{{ c }}" {{ c == q_cat and 'selected' or '' }}>{{ c|cat_ja }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>表示件数
+      <select name="per">
+        {% for n in [50,100,200] %}
+          <option value="{{n}}" {{ per==n and 'selected' or '' }}>{{ n }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>ページ
+      <input type="number" name="page" value="{{ page }}" min="1" />
+    </label>
+    <button type="submit">適用</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>サムネ</th>
+        <th>タイトル / チャンネル</th>
+        <th>カテゴリ</th>
+        <th>+1時間</th>
+        <th>+3時間</th>
+        <th>+6時間</th>
+        <th>高評価/時</th>
+        <th>再生数</th>
+        <th>スコア</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set rank_start = (page-1)*per + 1 %}
+      {% for v in items %}
+        <tr>
+          <td>{{ rank_start + loop.index0 }}</td>
+          <td><a href="https://www.youtube.com/watch?v={{ v.video_id }}" target="_blank" rel="noopener"><img class="thumb" src="{{ v.thumb_hq }}" alt="thumb" loading="lazy"></a></td>
+          <td>
+            <div><a href="https://www.youtube.com/watch?v={{ v.video_id }}" target="_blank" rel="noopener">{{ v.title }}</a></div>
+            <div class="muted">{{ v.published_at|to_jst }} {% if v.is_short %}・Shorts{% endif %}</div>
+            {% if v.channel_title %}
+              <div class="muted">by <a href="https://www.youtube.com/channel/{{ v.channel_id }}" target="_blank" rel="noopener">{{ v.channel_title }}</a></div>
+            {% endif %}
+            {% if v.vcat %}<span class="badge">{{ v.vcat|cat_ja }}</span>{% endif %}
+          </td>
+          <td>{{ (v.category_name or "-")|cat_ja }}</td>
+          <td>{{ '%.0f' % v.d1h if v.d1h is not none else '-' }}</td>
+          <td>{{ '%.0f' % v.d3h if v.d3h is not none else '-' }}</td>
+          <td>{{ '%.0f' % v.d6h if v.d6h is not none else '-' }}</td>
+          <td>{{ '%.2f' % v.likes_per_hour if v.likes_per_hour is not none else '-' }}</td>
+          <td>{{ (v.current_views or 0)|num }}</td>
+          <td>{{ '%.3f' % v.score }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% set total_pages = (total // per) + (1 if total % per != 0 else 0) %}
+  <div class="pager" style="margin-top:10px; display:flex; gap:8px; align-items:center;">
+    {% set prev = page - 1 %}
+    {% set next = page + 1 %}
+    {% if prev >= 1 %}
+      <a href="?view=list&type={{ q_type }}&category={{ q_cat }}&vcat={{ q_vcat }}&sort={{ sort }}&per={{ per }}&page={{ prev }}">« Prev</a>
+    {% else %}
+      <span class="muted">« Prev</span>
+    {% endif %}
+    <span class="muted">Page {{ page }} / {{ total_pages }}</span>
+    {% if next <= total_pages %}
+      <a href="?view=list&type={{ q_type }}&category={{ q_cat }}&vcat={{ q_vcat }}&sort={{ sort }}&per={{ per }}&page={{ next }}">Next »</a>
+    {% else %}
+      <span class="muted">Next »</span>
+    {% endif %}
+  </div>
+
+</div>
+</body>
+</html>

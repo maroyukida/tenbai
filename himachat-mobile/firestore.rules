@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { return exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function isRoomMember(roomId) {
+      return exists(/databases/$(database)/documents/rooms/$(roomId)) &&
+             request.auth.uid in get(/databases/$(database)/documents/rooms/$(roomId)).data.participants;
+    }
+
+    match /queue/{uid} {
+      allow read, write: if isSignedIn() && uid == request.auth.uid;
+    }
+
+    match /rooms/{roomId} {
+      allow read: if isSignedIn() && (isRoomMember(roomId) || isAdmin());
+      allow write: if isSignedIn() && (isRoomMember(roomId) || isAdmin());
+      match /messages/{msgId} {
+        allow read: if isSignedIn() && (isRoomMember(roomId) || isAdmin());
+        allow create: if isSignedIn() && (isRoomMember(roomId) || isAdmin())
+          && request.resource.data.senderId == request.auth.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 500;
+        allow update, delete: if isAdmin();
+      }
+      match /presence/{memberId} {
+        allow read: if isSignedIn() && (isRoomMember(roomId) || isAdmin());
+        allow write: if isSignedIn() && ((isRoomMember(roomId) && memberId == request.auth.uid) || isAdmin());
+      }
+      match /typing/{memberId} {
+        allow read: if isSignedIn() && (isRoomMember(roomId) || isAdmin());
+        allow write: if isSignedIn() && ((isRoomMember(roomId) && memberId == request.auth.uid) || isAdmin());
+      }
+    }
+
+    match /reports/{id} {
+      allow create: if isSignedIn();
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    match /profiles/{uid} {
+      allow read, write: if isSignedIn() && uid == request.auth.uid;
+    }
+
+    // 管理者印の読み取り（自分の印のみ）。書き込みはコンソール/管理SDKで実施
+    match /admins/{uid} {
+      allow read: if isSignedIn() && uid == request.auth.uid;
+      allow write: if false;
+    }
+  }
+}

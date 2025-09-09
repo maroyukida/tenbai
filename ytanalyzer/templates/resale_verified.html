@@ -1,0 +1,85 @@
+{% extends "resale_layout.html" %}
+{% block body %}
+<style>
+  .sticky-head th{ position: sticky; top: 0; background: var(--card); z-index: 2; }
+  .pill{display:inline-block;padding:4px 10px;border:1px solid var(--border);border-radius:9999px;font-size:12px;background:var(--badge);color:var(--badge-fg)}
+  .muted{ color: var(--muted); }
+  .toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin: 8px 0 12px; }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h1 class="h4 mb-0">Resale Verified Sellers</h1>
+  <div class="muted">Source: {{ path }} • Total {{ total }}</div>
+  <div></div>
+  <a class="pill" href="/resale/sellers">◀ Candidates</a>
+  <a class="pill" href="/resale/items">Items ▶</a>
+</div>
+
+<form class="toolbar" method="get" action="/resale/verified">
+  <input type="hidden" name="path" value="{{ path }}"/>
+  <label>件数
+    <select class="form-select form-select-sm d-inline-block w-auto" name="limit">
+      {% for n in [50,100,200,500] %}
+        <option value="{{ n }}" {{ 'selected' if n==limit else '' }}>{{ n }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label><input class="form-check-input" type="checkbox" name="matched_only" value="1" {{ 'checked' if request.args.get('matched_only') in ['1','true','True'] else '' }}/> AE一致あり</label>
+  <label>高スコア件数≥
+    <input class="form-control form-control-sm d-inline-block w-auto" type="number" name="min_high" min="0" value="{{ request.args.get('min_high', '') }}" placeholder="1" />
+  </label>
+  <label>平均利益≥
+    <input class="form-control form-control-sm d-inline-block w-auto" type="number" name="min_avg_profit" min="0" value="{{ request.args.get('min_avg_profit', '') }}" placeholder="0" />
+  </label>
+  <button class="btn btn-sm btn-primary" type="submit">適用</button>
+</form>
+
+{% if summary %}
+  <div class="mb-2">
+    <span class="kpi-chip">Sellers: {{ summary.sellers|fmt_int }}</span>
+    <span class="kpi-chip">With AE: {{ summary.with_ae|fmt_int }}</span>
+    <span class="kpi-chip">High score: {{ summary.high|fmt_int }}</span>
+    <span class="kpi-chip">Avg Profit: {{ summary.avg_profit|fmt_money }}</span>
+  </div>
+{% endif %}
+
+<div class="table-responsive" style="max-height:78vh;">
+  <table class="table table-sm table-hover align-middle">
+    <thead class="sticky-head">
+      <tr>
+        <th>Seller</th>
+        <th>Scanned</th>
+        <th>With AE</th>
+        <th>High score</th>
+        <th>Avg</th>
+        <th>Max</th>
+        <th>Avg Profit</th>
+        <th>Avg Margin</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in items %}
+      <tr>
+        <td><a href="{{ r.get('seller_url') }}" target="_blank" rel="noopener">{{ r.get('seller_id') }}</a></td>
+        <td>{{ r.get('items_scanned') }}</td>
+        <td><span class="badge text-bg-secondary">{{ r.get('with_ae_candidates') }}</span></td>
+        <td><span class="badge text-bg-secondary">{{ r.get('high_score_count') }}</span></td>
+        <td>{{ r.get('avg_score')|fmt_float(3) }}</td>
+        <td><span class="{{ r.get('max_score')|score_cls }}">{{ r.get('max_score')|fmt_float(3) }}</span></td>
+        <td>{{ r.get('avg_profit_jpy')|fmt_money }}</td>
+        <td>{{ r.get('avg_margin_rate')|fmt_pct(1) }}</td>
+        <td>
+          {% if r.get('example_yahoo_url') %}
+            <a href="{{ r.get('example_yahoo_url') }}" target="_blank" rel="noopener">yahoo</a>
+          {% endif %}
+          {% if r.get('example_ae_url') %}
+            · <a href="{{ r.get('example_ae_url') }}" target="_blank" rel="noopener">ae</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

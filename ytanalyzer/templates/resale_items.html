@@ -1,0 +1,94 @@
+{% extends "resale_layout.html" %}
+{% block body %}
+<style>
+  .sticky-head th{ position: sticky; top: 0; background: var(--card); z-index: 2; }
+  .pill{display:inline-block;padding:4px 10px;border:1px solid var(--border);border-radius:9999px;font-size:12px;background:var(--badge);color:var(--badge-fg)}
+  .muted{ color: var(--muted); }
+  .toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin: 8px 0 12px; }
+  img.thumb{width:100px;height:100px;object-fit:cover;border-radius:6px;border:1px solid var(--border)}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h1 class="h4 mb-0">Resale Items (Profit)</h1>
+  <div class="muted">Source: {{ path }} • Total {{ total }}</div>
+  <div></div>
+  <a class="pill" href="/resale/verified">◀ Verified</a>
+</div>
+
+<form class="toolbar" method="get" action="/resale/items">
+  <input type="hidden" name="path" value="{{ path }}"/>
+  <label>件数
+    <select class="form-select form-select-sm d-inline-block w-auto" name="limit">
+      {% for n in [50,100,200,500] %}
+        <option value="{{ n }}" {{ 'selected' if n==limit else '' }}>{{ n }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>最低利益(円)
+    <input class="form-control form-control-sm d-inline-block w-auto" type="number" name="min_profit" value="{{ request.args.get('min_profit', '') }}" placeholder="0" />
+  </label>
+  <label>最低スコア
+    <input class="form-control form-control-sm d-inline-block w-auto" type="number" step="0.01" min="0" max="1" name="min_score" value="{{ request.args.get('min_score', '') }}" placeholder="0.75" />
+  </label>
+  <label><input class="form-check-input" type="checkbox" name="matched_only" value="1" {{ 'checked' if request.args.get('matched_only') in ['1','true','True'] else '' }}/> AE一致あり</label>
+  <button class="btn btn-sm btn-primary" type="submit">適用</button>
+</form>
+
+<div class="table-responsive" style="max-height:78vh;">
+  <table class="table table-sm table-hover align-middle">
+    <thead class="sticky-head">
+      <tr>
+        <th>Yahoo</th>
+        <th>AliExpress</th>
+        <th>Similarity</th>
+        <th>Price/Profit</th>
+        <th>Find</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in items %}
+      <tr>
+        <td>
+          {% if r.get('yahoo_image') %}
+            <a href="{{ r.get('yahoo_url') }}" target="_blank" rel="noopener"><img class="thumb" src="{{ r.get('yahoo_image') }}"/></a>
+          {% endif %}
+          <div><a href="{{ r.get('yahoo_url') }}" target="_blank" rel="noopener">{{ r.get('yahoo_title') }}</a></div>
+        </td>
+        <td>
+          {% if r.get('ae_image') %}
+            <a href="{{ r.get('ae_url') }}" target="_blank" rel="noopener"><img class="thumb" src="{{ r.get('ae_image') }}"/></a>
+          {% endif %}
+          <div><a href="{{ r.get('ae_url') }}" target="_blank" rel="noopener">{{ r.get('ae_title') }}</a></div>
+        </td>
+        <td>
+          <div>title: {{ r.get('title_sim') }}</div>
+          <div>img dist: {{ r.get('img_dist') }}</div>
+          <div>ratio: {{ r.get('price_ratio') }}</div>
+          <div>score: <strong>{{ r.get('score') }}</strong></div>
+        </td>
+        <td class="num">
+          <div>Yahoo: {{ r.get('yahoo_price') }}</div>
+          <div>AE: {{ r.get('ae_price') }}</div>
+          <div>Revenue: {{ r.get('est_revenue_jpy') }}</div>
+          <div>Cost: {{ r.get('est_cost_jpy') }}</div>
+          <div>Fee: {{ r.get('est_fee_jpy') }}</div>
+          <div><span class="badge text-bg-success">Profit: {{ r.get('est_profit_jpy') }}</span></div>
+          <div>Margin: {{ r.get('est_margin_rate') }}</div>
+        </td>
+        <td>
+          {% set q = r.get('yahoo_title') %}
+          {% set img = r.get('yahoo_image') %}
+          <div><a class="pill" href="https://www.aliexpress.com/wholesale?SearchText={{ q|urlq }}" target="_blank" rel="noopener">AE search</a></div>
+          <div><a class="pill" href="https://www.temu.com/search_result.html?search_key={{ q|urlq }}" target="_blank" rel="noopener">Temu search</a></div>
+          <div><a class="pill" href="https://www.google.com/search?q=site%3Aaliexpress.com+{{ q|urlq }}" target="_blank" rel="noopener">Google site:AE</a></div>
+          {% if img %}
+            <div><a class="pill" href="https://www.bing.com/images/searchbyimage?FORM=IRSBIQ&cbir=sbi&imgurl={{ img|urlq }}" target="_blank" rel="noopener">Bing image</a></div>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+project: maple-preBB-jp
+time_range:
+  from: 2003
+  to: 20091231
+sources:
+  # Popular JP free hosts/blogs of mid-2000s; fetch broadly, then filter by content keywords
+  - pattern: "fc2.com/*"
+    match: domain
+  - pattern: "xrea.com/*"
+    match: domain
+  - pattern: "seesaa.net/*"
+    match: domain
+  - pattern: "jugem.jp/*"
+    match: domain
+  - pattern: "livedoor.jp/*"
+    match: domain
+  - pattern: "cocolog-nifty.com/*"
+    match: domain
+  - pattern: "yaplog.jp/*"
+    match: domain
+  - pattern: "ninja-web.net/*"
+    match: domain
+  - pattern: "geocities.jp/*"
+    match: domain
+  - pattern: "wikiwiki.jp/*"
+    match: prefix
+cdx:
+  collapse: "timestamp:8"
+  fields: ["timestamp","original","mimetype","statuscode","digest","length"]
+  filters:
+    - "statuscode:200"
+    - "mimetype:text/html"
+  page_size: 200
+  max_pages: 5
+fetch:
+  rps: 1.2
+  retries: 3
+  timeout_sec: 20
+store:
+  warc_dir: "./archive/warc"
+  meta_dir: "./archive/meta"
+  index: "./index/maple_jp.db"
+parse:
+  encoding_priority: ["utf-8","cp932","euc-jp","iso-2022-jp"]
+similarity:
+  simhash_bits: 64
+content_filter:
+  keywords_any: ["メイプル", "メイプルストーリー", "MapleStory", "maple"]

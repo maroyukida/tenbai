@@ -1,0 +1,22 @@
+# Exclude heavy or local-only content
+.venv/**
+node_modules/**
+archive/**
+data/**
+**/*.jsonl
+**/*.sqlite
+**/*.db
+**/*.log
+**/*.mp4
+**/*.zip
+**/*.7z
+**/*.gz
+**/*.tar
+
+# Exports are big; include only small CSVs used by the app
+exports/**
+!exports/*.csv
+
+# Mentomo and other unrelated projects (if present)
+mentomo/**
+

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}{% block body %}
+<a class="btn btn-sm btn-outline-secondary my-2" href="/">← 一覧へ</a>
+<h4 class="mb-1">{{ ch["channel_name"] or ch["channel_id"] }}</h4>
+<p class="text-muted"><a href="{{ ch['detail_url'] }}" target="_blank" rel="noopener">Yutura</a></p>
+<div class="row g-3 mb-3">
+  <div class="col-md-6"><div class="card"><div class="card-body">
+    <div><strong>BAN日</strong>：{{ ch["ban_date"] or "-" }}</div>
+    <div><strong>登録者</strong>：{{ ch["subs"] }}</div>
+    <div><strong>総再生</strong>：{{ ch["views"] }}</div>
+    <div><strong>動画数</strong>：{{ ch["videos"] }}</div>
+    <div><strong>開設日</strong>：{{ ch["opened_on"] or "-" }}</div>
+  </div></div></div>
+  <div class="col-md-6"><div class="card"><div class="card-body">
+    <div><strong>ページ本文（抜粋）</strong></div>
+    <div style="font-size:90%;max-height:420px;overflow:auto;white-space:pre-wrap;">{{ ch["page_text"][:2000] or "-" }}</div>
+  </div></div></div>
+</div>
+<h5>最新動画</h5>
+<div class="table-responsive">
+<table class="table table-sm table-hover align-middle">
+  <thead class="table-light"><tr><th>#</th><th>タイトル</th><th>再生</th><th>いいね</th><th class="nowrap">公開</th></tr></thead>
+  <tbody>{% for v in vids %}
+    <tr>
+      <td>{{ v["video_rank"] }}</td>
+      <td style="min-width:280px;"><a href="{{ v['video_url'] }}" target="_blank" rel="noopener">{{ v["video_title"] }}</a></td>
+      <td>{{ v["video_views"] }}</td>
+      <td>{{ v["video_likes"] }}</td>
+      <td class="nowrap">{{ v["published_tx"] or v["published_at"] or "-" }}</td>
+    </tr>
+  {% endfor %}</tbody>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{
+  "name": "himachat-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "main": "App.tsx",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "assets:gen": "node scripts/generate_assets.js",
+    "config:firebase": "node scripts/apply_firebase_config.js",
+    "preflight": "node scripts/preflight_check.js"
+  },
+  "dependencies": {
+    "expo": "^51.0.0",
+    "expo-status-bar": "^1.11.1",
+    "react": "18.2.0",
+    "react-native": "0.74.3",
+    "firebase": "^10.12.0",
+    "@react-navigation/native": "^6.1.16",
+    "@react-navigation/native-stack": "^6.9.25",
+    "react-native-safe-area-context": "^4.10.5",
+    "react-native-screens": "^3.31.1",
+    "react-native-gesture-handler": "^2.16.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "babel-preset-expo": "^11.0.6",
+    "typescript": "^5.4.5",
+    "jest-expo": "^51.0.3",
+    "@testing-library/react-native": "^12.5.2",
+    "@testing-library/jest-native": "^5.4.3",
+    "@types/jest": "^29.5.12",
+    "react-test-renderer": "18.2.0",
+    "pngjs": "^7.0.0"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-native|@react-native|@react-navigation|expo|@expo|expo-modules-core)/)"
+    ]
+  }
+}

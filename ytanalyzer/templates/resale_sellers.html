@@ -1,0 +1,89 @@
+{% extends "resale_layout.html" %}
+{% block body %}
+<style>
+  .sticky-head th{ position: sticky; top: 0; background: var(--card); z-index: 2; }
+  .pill{display:inline-block;padding:4px 10px;border:1px solid var(--border);border-radius:9999px;font-size:12px;background:var(--badge);color:var(--badge-fg)}
+  .muted{ color: var(--muted); }
+  .kpi{ display:flex; gap:10px; flex-wrap:wrap; font-size:.9rem; }
+  .kpi .badge{ font-size:.8rem }
+  .toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin: 8px 0 12px; }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h1 class="h4 mb-0">Resale Seller Candidates</h1>
+  <div class="muted">Source: {{ path }} • Total {{ total }}</div>
+  <div></div>
+  <a class="pill" href="/resale/verified">Verified ▶</a>
+  <a class="pill" href="/resale/items">Items ▶</a>
+</div>
+
+<form class="toolbar" method="get" action="/resale/sellers">
+  <input type="hidden" name="path" value="{{ path }}"/>
+  <label>件数
+    <select class="form-select form-select-sm d-inline-block w-auto" name="limit">
+      {% for n in [50,100,200,500] %}
+        <option value="{{ n }}" {{ 'selected' if n==limit else '' }}>{{ n }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>並び順
+    <select class="form-select form-select-sm d-inline-block w-auto" name="sort">
+      {% for k,label in {'overseas_rate':'Overseas率','score':'Score','hit_rate':'Hit率','n_items_sample':'Samples','title_hits':'Titleヒット'}.items() %}
+        <option value="{{ k }}" {{ 'selected' if request.args.get('sort','overseas_rate')==k else '' }}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <select class="form-select form-select-sm d-inline-block w-auto" name="order">
+      {% for k,label in {'desc':'降順','asc':'昇順'}.items() %}
+        <option value="{{ k }}" {{ 'selected' if request.args.get('order','desc')==k else '' }}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>海外率≥
+    <input class="form-control form-control-sm d-inline-block w-auto" type="number" name="min_overseas_rate" step="0.1" min="0" max="1" value="{{ request.args.get('min_overseas_rate', '') }}" placeholder="0.5" />
+  </label>
+  <label>海外件数≥
+    <input class="form-control form-control-sm d-inline-block w-auto" type="number" name="min_overseas" min="0" value="{{ request.args.get('min_overseas', '') }}" placeholder="1" />
+  </label>
+  <button class="btn btn-sm btn-primary" type="submit">適用</button>
+</form>
+
+<div class="table-responsive" style="max-height:78vh;">
+  <table class="table table-sm table-hover align-middle">
+    <thead class="sticky-head">
+      <tr>
+        <th>Seller</th>
+        <th>Sample</th>
+        <th>Overseas</th>
+        <th>Hit rate</th>
+        <th>Score</th>
+        <th>Example</th>
+        <th>Find</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in items %}
+      <tr>
+        <td><a href="{{ r.get('seller_url') }}" target="_blank" rel="noopener">{{ r.get('seller_id') }}</a></td>
+        <td><span class="badge text-bg-secondary">{{ r.get('n_items_sample')|fmt_int }}</span> / <span class="badge text-bg-secondary">{{ r.get('title_hits')|fmt_int }}</span></td>
+        <td><span class="badge text-bg-warning">{{ r.get('overseas_hits')|fmt_int }}</span> <span class="badge text-bg-light">{{ r.get('overseas_rate')|fmt_pct(0) }}</span></td>
+        <td>{{ r.get('hit_rate')|fmt_pct(0) }}</td>
+        <td><span class="{{ r.get('score')|score_cls }}">{{ r.get('score')|fmt_float(2) }}</span></td>
+        <td>
+          {% if r.get('example_item_url') %}
+            <a href="{{ r.get('example_item_url') }}" target="_blank" rel="noopener">item</a>
+          {% endif %}
+        </td>
+        <td>
+          {% set q = r.get('example_title') or '' %}
+          {% if q %}
+            <a class="pill" href="https://www.aliexpress.com/wholesale?SearchText={{ q|urlq }}" target="_blank" rel="noopener">AE</a>
+            <a class="pill" href="https://www.temu.com/search_result.html?search_key={{ q|urlq }}" target="_blank" rel="noopener">Temu</a>
+            <a class="pill" href="https://www.google.com/search?q=site%3Aaliexpress.com+{{ q|urlq }}" target="_blank" rel="noopener">G:AE</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
